@@ -1,0 +1,1 @@
+alter table medicos add column especialidade varchar(100) not null;
