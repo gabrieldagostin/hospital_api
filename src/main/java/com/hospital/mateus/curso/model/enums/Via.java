@@ -2,10 +2,19 @@ package com.hospital.mateus.curso.model.enums;
 
 public enum Via {
 
-    INTRAMUSCULAR,
-    NASAL,
     ORAL,
+    SUBLINGUAL,
     RETAL,
-    VENOSO
+    INJETAVEL,
+    INTRAVENOSA,
+    INTRAMUSCULAR,
+    SUBCUTANEA,
+    INALATORIA,
+    NASAL,
+    TOPICA,
+    OCULAR,
+    OTICA,
+    TRANSDERMICA,
+    EPIDURAL
 
 }

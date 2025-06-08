@@ -26,6 +26,7 @@ public class Medico extends Funcionario {
     public Medico(DadosCadastroMedico dados) {
         super(
                 dados.nome(),
+                dados.sexo(),
                 dados.idade(),
                 dados.cpf(),
                 dados.salario());

@@ -5,10 +5,15 @@ import com.hospital.mateus.curso.model.enums.Via;
 import jakarta.validation.constraints.NotNull;
 
 public record DadosAtualizarRemedio(
+
         @NotNull
-        long id,
+        Long id,
+
         String nome,
+
         Via via,
-        Laboratorio laboratorio) {
+
+        Laboratorio laboratorio
+) {
 
 }

@@ -1,8 +1,10 @@
 package com.hospital.mateus.curso.controllers;
 
 import com.hospital.mateus.curso.dto.*;
+import com.hospital.mateus.curso.model.Medico;
 import com.hospital.mateus.curso.model.Paciente;
 import com.hospital.mateus.curso.model.Remedio;
+import com.hospital.mateus.curso.repository.MedicoRepository;
 import com.hospital.mateus.curso.repository.PacienteRepository;
 import com.hospital.mateus.curso.repository.RemedioRepository;
 import jakarta.transaction.Transactional;
@@ -24,16 +26,19 @@ public class PacienteController {
     @Autowired
     private RemedioRepository remedioRepository;
 
+    @Autowired
+    private MedicoRepository medicoRepository;
+
 
     @PostMapping
     @Transactional
     public ResponseEntity<DadosDetalhamentoPaciente> cadastrar(@RequestBody @Valid DadosCadastroPaciente dados, UriComponentsBuilder uriBuilder) {
-        var paciente = new Paciente(dados);
+        Paciente paciente = new Paciente(dados);
         pacienteRepository.save(paciente);
 
         var uri = uriBuilder.path("/pacientes/{id}").buildAndExpand(paciente.getId()).toUri();
 
-        return ResponseEntity.created(uri).body(new DadosDetalhamentoPaciente(paciente));
+        return ResponseEntity.created(uri).body(new @Valid DadosDetalhamentoPaciente(paciente));
     }
 
 
@@ -47,7 +52,7 @@ public class PacienteController {
 
     @GetMapping("/{id}")
     public ResponseEntity<DadosDetalhamentoPaciente> detalhar(@PathVariable long id) {
-        var paciente = pacienteRepository.getReferenceById(id);
+        Paciente paciente = pacienteRepository.getReferenceById(id);
 
         return ResponseEntity.ok(new DadosDetalhamentoPaciente(paciente));
     }
@@ -56,17 +61,17 @@ public class PacienteController {
     @PutMapping
     @Transactional
     public ResponseEntity<DadosDetalhamentoPaciente> atualizar(@RequestBody @Valid DadosAtualizarPaciente dados) {
-        var paciente = pacienteRepository.getReferenceById(dados.id());
+        Paciente paciente = pacienteRepository.getReferenceById(dados.id());
         paciente.atualizarPaciente(dados);
 
-        return ResponseEntity.ok(new DadosDetalhamentoPaciente(paciente));
+        return ResponseEntity.ok(new @Valid DadosDetalhamentoPaciente(paciente));
     }
 
 
     @PutMapping("/reativar/{id}")
     @Transactional
     public ResponseEntity<Void> reativar(@PathVariable long id) {
-        var paciente = pacienteRepository.getReferenceById(id);
+        Paciente paciente = pacienteRepository.getReferenceById(id);
         paciente.reativar();
 
         return ResponseEntity.noContent().build();
@@ -76,7 +81,7 @@ public class PacienteController {
     @DeleteMapping("/inativar/{id}")
     @Transactional
     public ResponseEntity<Void> inativar(@PathVariable long id) {
-        var paciente = pacienteRepository.getReferenceById(id);
+        Paciente paciente = pacienteRepository.getReferenceById(id);
         paciente.inativar();
 
         return ResponseEntity.noContent().build();
@@ -92,9 +97,9 @@ public class PacienteController {
     }
 
 
-    @PatchMapping("/adicionar-remedio")
+    @PatchMapping("/associar-remedio")
     @Transactional
-    public ResponseEntity<Void> adicionarRemedio(@RequestBody DadosAssociarRemedioPaciente dados) {
+    public ResponseEntity<Void> associarRemedio(@RequestBody @Valid DadosAssociarRemedioPaciente dados) {
         Paciente paciente = pacienteRepository.findById(dados.paciente_id())
                 .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
 
@@ -111,7 +116,7 @@ public class PacienteController {
 
     @DeleteMapping("/remover-remedio")
     @Transactional
-    public ResponseEntity<Void> removerRemedio(@RequestBody DadosAssociarRemedioPaciente dados) {
+    public ResponseEntity<Void> removerRemedio(@RequestBody @Valid DadosAssociarRemedioPaciente dados) {
         Paciente paciente = pacienteRepository.findById(dados.paciente_id())
                 .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
 
@@ -138,5 +143,33 @@ public class PacienteController {
     }
 
 
+    @PatchMapping("/associar-medico")
+    @Transactional
+    public ResponseEntity<Void> associarMedico(@RequestBody @Valid DadosAssociarMedicoPaciente dados) {
+        Paciente paciente = pacienteRepository.findById(dados.paciente_id())
+                .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
 
+        Medico medico = medicoRepository.findById(dados.medico_id())
+                .orElseThrow(() -> new RuntimeException("Médico não encontrado"));
+
+        if (paciente.getMedico() == null) {
+            paciente.setMedico(medico);
+            pacienteRepository.save(paciente);
+        }
+
+        return ResponseEntity.noContent().build();
+
+    }
+
+
+    @DeleteMapping("/remover-medico")
+    @Transactional
+    public ResponseEntity<Void> removerMedico(@RequestBody @Valid DadosRemoverMedicoPaciente dados) {
+        Paciente paciente = pacienteRepository.findById(dados.paciente_id())
+                .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
+
+        paciente.setMedico(null);
+
+        return ResponseEntity.noContent().build();
+    }
 }

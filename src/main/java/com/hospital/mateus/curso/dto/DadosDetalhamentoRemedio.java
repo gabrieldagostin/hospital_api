@@ -3,11 +3,13 @@ package com.hospital.mateus.curso.dto;
 import com.hospital.mateus.curso.model.enums.Laboratorio;
 import com.hospital.mateus.curso.model.Remedio;
 import com.hospital.mateus.curso.model.enums.Via;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
 public record DadosDetalhamentoRemedio(
 
+        @NotNull
         Long id,
 
         String nome,
@@ -22,7 +24,8 @@ public record DadosDetalhamentoRemedio(
 
         Laboratorio laboratorio,
 
-        boolean ativo) {
+        boolean ativo
+) {
 
     public DadosDetalhamentoRemedio(Remedio remedio) {
         this(

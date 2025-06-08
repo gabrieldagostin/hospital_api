@@ -1,9 +1,7 @@
 package com.hospital.mateus.curso.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import com.hospital.mateus.curso.model.enums.Sexo;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -20,12 +18,15 @@ public abstract class Pessoa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
     protected String nome;
+    @Enumerated(EnumType.STRING)
+    protected Sexo sexo;
     protected int idade;
     protected String cpf;
     protected boolean ativo;
 
-    public Pessoa(@NotBlank String nome, @NotNull int idade, @NotBlank String cpf) {
+    public Pessoa(@NotBlank String nome, @NotBlank Sexo sexo, @NotNull int idade, @NotBlank String cpf) {
         this.nome = nome;
+        this.sexo = sexo;
         this.idade = idade;
         this.cpf = cpf;
         this.ativo = true;

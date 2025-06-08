@@ -2,12 +2,17 @@ package com.hospital.mateus.curso.dto;
 
 import com.hospital.mateus.curso.model.Medico;
 import com.hospital.mateus.curso.model.enums.Especialidade;
+import com.hospital.mateus.curso.model.enums.Sexo;
+import jakarta.validation.constraints.NotNull;
 
 public record DadosDetalhamentoMedico(
 
-        long id,
+        @NotNull
+        Long id,
 
         String nome,
+
+        Sexo sexo,
 
         int idade,
 
@@ -26,6 +31,7 @@ public record DadosDetalhamentoMedico(
         this(
                 medico.getId(),
                 medico.getNome(),
+                medico.getSexo(),
                 medico.getIdade(),
                 medico.getCpf(),
                 medico.getSalario(),

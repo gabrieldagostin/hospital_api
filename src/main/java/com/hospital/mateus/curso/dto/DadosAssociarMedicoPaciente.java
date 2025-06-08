@@ -2,13 +2,13 @@ package com.hospital.mateus.curso.dto;
 
 import jakarta.validation.constraints.NotNull;
 
-public record DadosAtualizarMedico(
+public record DadosAssociarMedicoPaciente(
 
         @NotNull
-        Long id,
+        Long paciente_id,
 
-        String nome,
-
-        Double salario
+        @NotNull
+        Long medico_id
 ) {
+
 }

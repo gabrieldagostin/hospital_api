@@ -1,5 +1,6 @@
 package com.hospital.mateus.curso.model;
 
+import com.hospital.mateus.curso.model.enums.Sexo;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -19,8 +20,8 @@ public abstract class Funcionario extends Pessoa{
     @Positive
     protected double salario;
 
-    public Funcionario(@NotBlank String nome, @NotNull int idade, @NotBlank String cpf, @NotNull double salario) {
-        super(nome, idade, cpf);
+    public Funcionario(@NotBlank String nome, @NotBlank Sexo sexo, @NotNull int idade, @NotBlank String cpf, @NotNull double salario) {
+        super(nome, sexo, idade, cpf);
         this.salario = salario;
     }
 }

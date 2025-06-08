@@ -2,7 +2,20 @@ package com.hospital.mateus.curso.model.enums;
 
 public enum Laboratorio {
 
+    EMS,
+    EUROFARMA,
+    ACHE,
+    HYPERA_PHARMA,
+    NEO_QUIMICA,
     MEDLEY,
-    ACHE
+    SANOFI,
+    PFIZER,
+    NOVARTIS,
+    BAYER,
+    ROCHE,
+    GSK,
+    ASTRAZENECA,
+    MERCK,
+    BOEHRINGER_INGELHEIM
 
 }

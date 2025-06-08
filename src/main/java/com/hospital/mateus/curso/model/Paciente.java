@@ -1,6 +1,5 @@
 package com.hospital.mateus.curso.model;
 
-import com.hospital.mateus.curso.dto.DadosAssociarRemedioPaciente;
 import com.hospital.mateus.curso.dto.DadosAtualizarPaciente;
 import com.hospital.mateus.curso.dto.DadosCadastroPaciente;
 import jakarta.persistence.*;
@@ -27,11 +26,15 @@ public class Paciente extends Pessoa {
             inverseJoinColumns = @JoinColumn(name = "remedio_id")
     )
     private List<Remedio> remedios;
-    
+
+    @ManyToOne
+    @JoinColumn(name = "medico_id")
+    private Medico medico;
 
     public Paciente(DadosCadastroPaciente dados) {
         super(
                 dados.nome(),
+                dados.sexo(),
                 dados.idade(),
                 dados.cpf()
         );
