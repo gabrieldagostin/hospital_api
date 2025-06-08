@@ -11,8 +11,7 @@ public record DadosCadastroMedico(
 
         @NotBlank
         String nome,
-
-        @NotNull
+        
         @Enumerated(EnumType.STRING)
         Sexo sexo,
 
@@ -28,7 +27,6 @@ public record DadosCadastroMedico(
         @NotBlank
         String crm,
 
-        @NotNull
         @Enumerated(EnumType.STRING)
         Especialidade especialidade
 ) {
