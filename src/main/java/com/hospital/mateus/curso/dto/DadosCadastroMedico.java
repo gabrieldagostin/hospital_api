@@ -11,7 +11,7 @@ public record DadosCadastroMedico(
 
         @NotBlank
         String nome,
-        
+
         @Enumerated(EnumType.STRING)
         Sexo sexo,
 
