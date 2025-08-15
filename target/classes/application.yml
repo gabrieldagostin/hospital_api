@@ -1,0 +1,17 @@
+api:
+    security:
+        token:
+            secret: ${JWT_Secret:123456}
+server:
+    error:
+        include-stacktrace: never
+spring:
+    application:
+        name: CursoSpringBoot - teste
+    datasource:
+        password: ''
+        url: jdbc:mysql://localhost/hospital_api
+        username: root
+    jpa:
+        hibernate:
+            ddl-auto: none
