@@ -7,6 +7,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.Date;
+
 public record DadosCadastroMedico(
 
         @NotBlank
@@ -16,7 +18,7 @@ public record DadosCadastroMedico(
         Sexo sexo,
 
         @NotNull
-        int idade,
+        Date dataNasc,
 
         @NotBlank
         String cpf,

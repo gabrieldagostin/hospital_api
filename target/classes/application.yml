@@ -12,6 +12,3 @@ spring:
         password: ''
         url: jdbc:mysql://localhost/hospital_api
         username: root
-    jpa:
-        hibernate:
-            ddl-auto: none

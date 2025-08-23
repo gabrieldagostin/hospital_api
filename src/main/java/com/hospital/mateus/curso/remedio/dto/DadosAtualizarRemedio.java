@@ -11,6 +11,8 @@ public record DadosAtualizarRemedio(
 
         String nome,
 
+        int quantidade,
+
         Via via,
 
         Laboratorio laboratorio

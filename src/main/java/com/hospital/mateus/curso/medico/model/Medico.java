@@ -28,7 +28,7 @@ public class Medico extends Funcionario {
         super(
                 dados.nome(),
                 dados.sexo(),
-                dados.idade(),
+                dados.dataNasc(),
                 dados.cpf(),
                 dados.salario());
         this.crm = dados.crm();

@@ -50,7 +50,7 @@ public class PacienteController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<DadosDetalhamentoPaciente> detalhar(@PathVariable long id) {
+    public ResponseEntity<DadosDetalhamentoPaciente> detalhar(@PathVariable("id") long id) {
         Paciente paciente = pacienteRepository.getReferenceById(id);
 
         return ResponseEntity.ok(new DadosDetalhamentoPaciente(paciente));
@@ -69,7 +69,7 @@ public class PacienteController {
 
     @PutMapping("/reativar/{id}")
     @Transactional
-    public ResponseEntity<Void> reativar(@PathVariable long id) {
+    public ResponseEntity<Void> reativar(@PathVariable("id") long id) {
         Paciente paciente = pacienteRepository.getReferenceById(id);
         paciente.reativar();
 
@@ -79,7 +79,7 @@ public class PacienteController {
 
     @DeleteMapping("/inativar/{id}")
     @Transactional
-    public ResponseEntity<Void> inativar(@PathVariable long id) {
+    public ResponseEntity<Void> inativar(@PathVariable("id") long id) {
         Paciente paciente = pacienteRepository.getReferenceById(id);
         paciente.inativar();
 
@@ -89,7 +89,7 @@ public class PacienteController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<Void> deletar(@PathVariable long id) {
+    public ResponseEntity<Void> deletar(@PathVariable("id") long id) {
         pacienteRepository.deleteById(id);
 
         return ResponseEntity.noContent().build();
@@ -131,7 +131,7 @@ public class PacienteController {
 
 
     @GetMapping("/{id}/remedios")
-    public ResponseEntity<List<com.hospital.mateus.curso.remedio.dto.DadosRemedio>> listarRemedios(@PathVariable long id) {
+    public ResponseEntity<List<com.hospital.mateus.curso.remedio.dto.DadosRemedio>> listarRemedios(@PathVariable("id") long id) {
         Paciente paciente = pacienteRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
 

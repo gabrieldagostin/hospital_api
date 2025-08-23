@@ -56,6 +56,9 @@ public class Remedio {
         if (dados.via() != null) {
             this.via = dados.via();
         }
+        if (dados.quantidade() > -1) {
+            this.quantidade = dados.quantidade();
+        }
         if (dados.laboratorio() != null) {
             this.laboratorio = dados.laboratorio();
         }

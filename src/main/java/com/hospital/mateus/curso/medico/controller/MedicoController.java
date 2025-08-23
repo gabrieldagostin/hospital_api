@@ -50,7 +50,7 @@ public class MedicoController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<DadosDetalhamentoMedico> detalhar(@PathVariable long id) {
+    public ResponseEntity<DadosDetalhamentoMedico> detalhar(@PathVariable("id") long id) {
         Medico medico = repository.getReferenceById(id);
 
         return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));
@@ -69,7 +69,7 @@ public class MedicoController {
 
     @PutMapping("/reativar/{id}")
     @Transactional
-    public ResponseEntity<Void> reativar(@PathVariable long id) {
+    public ResponseEntity<Void> reativar(@PathVariable("id") long id) {
         Medico medico = repository.getReferenceById(id);
         medico.reativar();
 
@@ -79,7 +79,7 @@ public class MedicoController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<Void> deletar(@PathVariable long id) {
+    public ResponseEntity<Void> deletar(@PathVariable("id") long id) {
         repository.deleteById(id);
 
         return ResponseEntity.noContent().build();
@@ -88,7 +88,7 @@ public class MedicoController {
 
     @DeleteMapping("/inativar/{id}")
     @Transactional
-    public ResponseEntity<Void> inativar(@PathVariable long id) {
+    public ResponseEntity<Void> inativar(@PathVariable("id") long id) {
         Medico medico = repository.getReferenceById(id);
         medico.inativar();
 

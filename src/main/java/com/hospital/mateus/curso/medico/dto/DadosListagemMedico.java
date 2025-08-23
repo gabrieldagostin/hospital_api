@@ -5,6 +5,8 @@ import com.hospital.mateus.curso.core.enums.Especialidade;
 import com.hospital.mateus.curso.core.enums.Sexo;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.Date;
+
 public record DadosListagemMedico(
 
         @NotNull
@@ -14,7 +16,7 @@ public record DadosListagemMedico(
 
         Sexo sexo,
 
-        int idade,
+        Date dataNasc,
 
         String cpf,
 
@@ -31,7 +33,7 @@ public record DadosListagemMedico(
                 medico.getId(),
                 medico.getNome(),
                 medico.getSexo(),
-                medico.getIdade(),
+                medico.getDataNasc(),
                 medico.getCpf(),
                 medico.getSalario(),
                 medico.getCrm(),

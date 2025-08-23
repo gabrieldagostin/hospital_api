@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -20,14 +22,14 @@ public abstract class Pessoa {
     protected String nome;
     @Enumerated(EnumType.STRING)
     protected Sexo sexo;
-    protected int idade;
+    protected Date dataNasc;
     protected String cpf;
     protected boolean ativo;
 
-    public Pessoa(@NotBlank String nome, @NotBlank Sexo sexo, @NotNull int idade, @NotBlank String cpf) {
+    public Pessoa(@NotBlank String nome, @NotBlank Sexo sexo, @NotNull Date dataNasc, @NotBlank String cpf) {
         this.nome = nome;
         this.sexo = sexo;
-        this.idade = idade;
+        this.dataNasc = dataNasc;
         this.cpf = cpf;
         this.ativo = true;
     }

@@ -44,7 +44,7 @@ public class RemedioController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<DadosDetalhamentoRemedio> detalhar(@PathVariable long id) {
+    public ResponseEntity<DadosDetalhamentoRemedio> detalhar(@PathVariable("id") long id) {
         Remedio remedio = repository.getReferenceById(id);
 
         return ResponseEntity.ok(new DadosDetalhamentoRemedio(remedio));
@@ -63,7 +63,7 @@ public class RemedioController {
 
     @PutMapping("/reativar/{id}")
     @Transactional
-    public ResponseEntity<Void> ativar(@PathVariable long id) {
+    public ResponseEntity<Void> ativar(@PathVariable("id") long id) {
         Remedio remedio = repository.getReferenceById(id);
         remedio.reativar();
 
@@ -73,7 +73,7 @@ public class RemedioController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<Void> deletar(@PathVariable long id) {
+    public ResponseEntity<Void> deletar(@PathVariable("id") long id) {
         repository.deleteById(id);
 
         return ResponseEntity.noContent().build();
@@ -82,7 +82,7 @@ public class RemedioController {
 
     @DeleteMapping("inativar/{id}")
     @Transactional
-    public ResponseEntity<Void> inativar(@PathVariable long id) {
+    public ResponseEntity<Void> inativar(@PathVariable("id") long id) {
         Remedio remedio = repository.getReferenceById(id);
         remedio.inativar();
 

@@ -1,6 +1,9 @@
 package com.hospital.mateus.curso.usuario.model;
 
+import com.hospital.mateus.curso.usuario.dto.DadosAtualizarUsuario;
+import com.hospital.mateus.curso.usuario.dto.DadosCadastroUsuario;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,6 +26,11 @@ public class Usuario implements UserDetails {
     private Long id;
     private String login;
     private String senha;
+
+    public Usuario(@Valid DadosCadastroUsuario dados) {
+        this.login = dados.login();
+        this.senha = dados.senha();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -57,5 +65,14 @@ public class Usuario implements UserDetails {
     @Override
     public boolean isEnabled() {
         return UserDetails.super.isEnabled();
+    }
+
+    public void atualizarUsuario(DadosAtualizarUsuario dados) {
+        if (dados.login() != null) {
+            this.login = dados.login();
+        }
+        if (dados.senha() != null) {
+            this.senha = dados.senha();
+        }
     }
 }

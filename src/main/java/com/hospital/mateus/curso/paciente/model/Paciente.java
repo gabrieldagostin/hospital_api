@@ -38,7 +38,7 @@ public class Paciente extends Pessoa {
         super(
                 dados.nome(),
                 dados.sexo(),
-                dados.idade(),
+                dados.dataNasc(),
                 dados.cpf()
         );
     }

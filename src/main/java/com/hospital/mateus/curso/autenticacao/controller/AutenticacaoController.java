@@ -1,7 +1,7 @@
 package com.hospital.mateus.curso.autenticacao.controller;
 
 import com.hospital.mateus.curso.autenticacao.dto.DadosAutenticacao;
-import com.hospital.mateus.curso.autenticacao.jwt.DadosTokenJWT;
+import com.hospital.mateus.curso.autenticacao.dto.DadosTokenJWT;
 import com.hospital.mateus.curso.autenticacao.jwt.TokenService;
 import com.hospital.mateus.curso.usuario.model.Usuario;
 import jakarta.validation.Valid;
