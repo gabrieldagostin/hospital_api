@@ -6,6 +6,7 @@ import com.hospital.mateus.curso.remedio.dto.DadosDetalhamentoRemedio;
 import com.hospital.mateus.curso.remedio.dto.DadosListagemRemedio;
 import com.hospital.mateus.curso.remedio.model.Remedio;
 import com.hospital.mateus.curso.remedio.repository.RemedioRepository;
+import com.hospital.mateus.curso.remedio.service.RemedioService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,14 +21,13 @@ import java.util.List;
 @RequestMapping("/remedios")
 public class RemedioController {
 
-    private final RemedioRepository repository;
+    private final RemedioService remedioService;
 
 
     @PostMapping
     @Transactional
     public ResponseEntity<DadosDetalhamentoRemedio> cadastrar(@RequestBody @Valid DadosCadastroRemedio dados, UriComponentsBuilder uriBuilder) {
-        Remedio remedio = new Remedio(dados);
-        repository.save(remedio);
+        Remedio remedio = remedioService.cadastrar(dados);
 
         var uri = uriBuilder.path("/remedios/{id}").buildAndExpand(remedio.getId()).toUri();
 
@@ -37,7 +37,7 @@ public class RemedioController {
 
     @GetMapping
     public ResponseEntity<List<DadosListagemRemedio>> listar() {
-        var lista = repository.findAllByAtivoTrue().stream().map(DadosListagemRemedio::new).toList();
+        var lista = remedioService.listar();
 
         return ResponseEntity.ok(lista);
     }
@@ -45,7 +45,7 @@ public class RemedioController {
 
     @GetMapping("/{id}")
     public ResponseEntity<DadosDetalhamentoRemedio> detalhar(@PathVariable("id") long id) {
-        Remedio remedio = repository.getReferenceById(id);
+        Remedio remedio = remedioService.detalhar(id);
 
         return ResponseEntity.ok(new DadosDetalhamentoRemedio(remedio));
     }
@@ -54,8 +54,7 @@ public class RemedioController {
     @PutMapping
     @Transactional
     public ResponseEntity<DadosDetalhamentoRemedio> atualizar(@RequestBody @Valid DadosAtualizarRemedio dados) {
-        Remedio remedio = repository.getReferenceById(dados.id());
-        remedio.atualizarInformacoes(dados);
+        Remedio remedio = remedioService.atualizarRemedio(dados);
 
         return ResponseEntity.ok(new DadosDetalhamentoRemedio(remedio));
     }
@@ -64,8 +63,7 @@ public class RemedioController {
     @PutMapping("/reativar/{id}")
     @Transactional
     public ResponseEntity<Void> ativar(@PathVariable("id") long id) {
-        Remedio remedio = repository.getReferenceById(id);
-        remedio.reativar();
+        remedioService.ativar(id);
 
         return ResponseEntity.noContent().build();
     }
@@ -74,7 +72,7 @@ public class RemedioController {
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<Void> deletar(@PathVariable("id") long id) {
-        repository.deleteById(id);
+        remedioService.deletar(id);
 
         return ResponseEntity.noContent().build();
     }
@@ -83,9 +81,8 @@ public class RemedioController {
     @DeleteMapping("inativar/{id}")
     @Transactional
     public ResponseEntity<Void> inativar(@PathVariable("id") long id) {
-        Remedio remedio = repository.getReferenceById(id);
-        remedio.inativar();
-
+        remedioService.inativar(id);
+        
         return ResponseEntity.noContent().build();
     }
 

@@ -24,12 +24,12 @@ public class AutenticacaoController {
     private final TokenService tokenService;
 
     @PostMapping
-    public ResponseEntity<?> efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
+    public ResponseEntity<DadosTokenJWT> efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
         var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
         var autenticacao = authenticationManager.authenticate(token);
 
         var tokenJWT = tokenService.gerarToken((Usuario)
-        autenticacao.getPrincipal());
+                autenticacao.getPrincipal());
 
         return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
     }
