@@ -64,11 +64,11 @@ public class Remedio {
         }
     }
 
-    public void inativar() {
+    public void desativar() {
         this.ativo = false;
     }
 
-    public void reativar() {
+    public void ativar() {
         this.ativo = true;
     }
 }

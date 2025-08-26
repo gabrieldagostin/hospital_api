@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 public record DadosRemoverMedicoPaciente(
 
         @NotNull
-        Long paciente_id
+        Long pacienteId
 
 ) {
 }

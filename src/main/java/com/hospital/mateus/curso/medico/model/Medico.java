@@ -45,11 +45,11 @@ public class Medico extends Funcionario {
         }
     }
 
-    public void reativar() {
+    public void ativar() {
         setAtivo(true);
     }
 
-    public void inativar() {
+    public void desativar() {
         setAtivo(false);
     }
 

@@ -49,12 +49,12 @@ public class Paciente extends Pessoa {
         }
     }
 
-    public void reativar() {
-        setAtivo(true);
+    public void ativar() {
+        this.ativo = true;
     }
 
-    public void inativar() {
-        setAtivo(false);
+    public void desativar() {
+        this.ativo = false;
     }
 
 }

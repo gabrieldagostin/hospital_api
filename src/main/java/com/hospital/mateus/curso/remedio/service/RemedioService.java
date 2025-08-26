@@ -46,7 +46,7 @@ public class RemedioService {
 
     public void ativar(Long id) {
         Remedio remedio = remedioRepository.getReferenceById(id);
-        remedio.reativar();
+        remedio.ativar();
     }
 
 
@@ -55,8 +55,8 @@ public class RemedioService {
     }
 
 
-    public void inativar(Long id) {
+    public void desativar(Long id) {
         Remedio remedio = remedioRepository.getReferenceById(id);
-        remedio.inativar();
+        remedio.desativar();
     }
 }

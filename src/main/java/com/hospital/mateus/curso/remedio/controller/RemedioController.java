@@ -60,7 +60,7 @@ public class RemedioController {
     }
 
 
-    @PutMapping("/reativar/{id}")
+    @PutMapping("/ativar/{id}")
     @Transactional
     public ResponseEntity<Void> ativar(@PathVariable("id") long id) {
         remedioService.ativar(id);
@@ -78,11 +78,11 @@ public class RemedioController {
     }
 
 
-    @DeleteMapping("inativar/{id}")
+    @DeleteMapping("desativar/{id}")
     @Transactional
-    public ResponseEntity<Void> inativar(@PathVariable("id") long id) {
-        remedioService.inativar(id);
-        
+    public ResponseEntity<Void> desativar(@PathVariable("id") long id) {
+        remedioService.desativar(id);
+
         return ResponseEntity.noContent().build();
     }
 

@@ -3,6 +3,7 @@ package com.hospital.mateus.curso.paciente.controller;
 import com.hospital.mateus.curso.medico.model.Medico;
 import com.hospital.mateus.curso.paciente.dto.*;
 import com.hospital.mateus.curso.paciente.model.Paciente;
+import com.hospital.mateus.curso.paciente.service.PacienteService;
 import com.hospital.mateus.curso.remedio.dto.DadosRemedio;
 import com.hospital.mateus.curso.remedio.model.Remedio;
 import com.hospital.mateus.curso.medico.repository.MedicoRepository;
@@ -28,12 +29,13 @@ public class PacienteController {
 
     private final MedicoRepository medicoRepository;
 
+    private final PacienteService pacienteService;
+
 
     @PostMapping
     @Transactional
     public ResponseEntity<DadosDetalhamentoPaciente> cadastrar(@RequestBody @Valid DadosCadastroPaciente dados, UriComponentsBuilder uriBuilder) {
-        Paciente paciente = new Paciente(dados);
-        pacienteRepository.save(paciente);
+        Paciente paciente = pacienteService.cadastrar(dados);
 
         var uri = uriBuilder.path("/pacientes/{id}").buildAndExpand(paciente.getId()).toUri();
 
@@ -43,7 +45,7 @@ public class PacienteController {
 
     @GetMapping
     public ResponseEntity<List<DadosListagemPaciente>> listar() {
-        var lista = pacienteRepository.findAllByAtivoTrue().stream().map(DadosListagemPaciente::new).toList();
+        var lista = pacienteService.listar();
 
         return ResponseEntity.ok(lista);
     }
@@ -51,7 +53,7 @@ public class PacienteController {
 
     @GetMapping("/{id}")
     public ResponseEntity<DadosDetalhamentoPaciente> detalhar(@PathVariable("id") long id) {
-        Paciente paciente = pacienteRepository.getReferenceById(id);
+        Paciente paciente = pacienteService.detalhar(id);
 
         return ResponseEntity.ok(new DadosDetalhamentoPaciente(paciente));
     }
@@ -60,28 +62,25 @@ public class PacienteController {
     @PutMapping
     @Transactional
     public ResponseEntity<DadosDetalhamentoPaciente> atualizar(@RequestBody @Valid DadosAtualizarPaciente dados) {
-        Paciente paciente = pacienteRepository.getReferenceById(dados.id());
-        paciente.atualizarPaciente(dados);
+        Paciente paciente = pacienteService.atualizar(dados);
 
         return ResponseEntity.ok(new @Valid DadosDetalhamentoPaciente(paciente));
     }
 
 
-    @PutMapping("/reativar/{id}")
+    @PutMapping("/ativar/{id}")
     @Transactional
-    public ResponseEntity<Void> reativar(@PathVariable("id") long id) {
-        Paciente paciente = pacienteRepository.getReferenceById(id);
-        paciente.reativar();
+    public ResponseEntity<Void> ativar(@PathVariable("id") long id) {
+        pacienteService.ativar(id);
 
         return ResponseEntity.noContent().build();
     }
 
 
-    @DeleteMapping("/inativar/{id}")
+    @DeleteMapping("/desativar/{id}")
     @Transactional
-    public ResponseEntity<Void> inativar(@PathVariable("id") long id) {
-        Paciente paciente = pacienteRepository.getReferenceById(id);
-        paciente.inativar();
+    public ResponseEntity<Void> desativar(@PathVariable("id") long id) {
+        pacienteService.desativar(id);
 
         return ResponseEntity.noContent().build();
     }
@@ -90,7 +89,7 @@ public class PacienteController {
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<Void> deletar(@PathVariable("id") long id) {
-        pacienteRepository.deleteById(id);
+        pacienteService.deletar(id);
 
         return ResponseEntity.noContent().build();
     }
@@ -99,15 +98,7 @@ public class PacienteController {
     @PatchMapping("/associar-remedio")
     @Transactional
     public ResponseEntity<Void> associarRemedio(@RequestBody @Valid DadosAssociarRemedioPaciente dados) {
-        Paciente paciente = pacienteRepository.findById(dados.paciente_id())
-                .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
-
-        Remedio remedio = remedioRepository.findById(dados.remedio_id())
-                .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
-
-        paciente.getRemedios().add(remedio);
-
-        pacienteRepository.save(paciente);
+        pacienteService.associarRemedio(dados);
 
         return ResponseEntity.noContent().build();
     }
@@ -116,27 +107,15 @@ public class PacienteController {
     @DeleteMapping("/remover-remedio")
     @Transactional
     public ResponseEntity<Void> removerRemedio(@RequestBody @Valid DadosAssociarRemedioPaciente dados) {
-        Paciente paciente = pacienteRepository.findById(dados.paciente_id())
-                .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
-
-        Remedio remedio = remedioRepository.findById(dados.remedio_id())
-                .orElseThrow(() -> new RuntimeException("Remédio não encontrado"));
-
-        paciente.getRemedios().remove(remedio);
-
-        pacienteRepository.save(paciente);
+        pacienteService.removerRemedio(dados);
 
         return ResponseEntity.noContent().build();
     }
 
 
     @GetMapping("/{id}/remedios")
-    public ResponseEntity<List<com.hospital.mateus.curso.remedio.dto.DadosRemedio>> listarRemedios(@PathVariable("id") long id) {
-        Paciente paciente = pacienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
-
-        List<DadosRemedio> lista = paciente.getRemedios().stream()
-                .map(remedio -> new DadosRemedio(remedio.getId(), remedio.getNome())).toList();
+    public ResponseEntity<List<DadosRemedio>> listarRemedios(@PathVariable("id") long id) {
+        List<DadosRemedio> lista = pacienteService.listarRemedios(id);
 
         return ResponseEntity.ok(lista);
     }
@@ -145,16 +124,7 @@ public class PacienteController {
     @PatchMapping("/associar-medico")
     @Transactional
     public ResponseEntity<Void> associarMedico(@RequestBody @Valid DadosAssociarMedicoPaciente dados) {
-        Paciente paciente = pacienteRepository.findById(dados.paciente_id())
-                .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
-
-        Medico medico = medicoRepository.findById(dados.medico_id())
-                .orElseThrow(() -> new RuntimeException("Médico não encontrado"));
-
-        if (paciente.getMedico() == null) {
-            paciente.setMedico(medico);
-            pacienteRepository.save(paciente);
-        }
+        pacienteService.associarMedico(dados);
 
         return ResponseEntity.noContent().build();
 
@@ -164,10 +134,7 @@ public class PacienteController {
     @DeleteMapping("/remover-medico")
     @Transactional
     public ResponseEntity<Void> removerMedico(@RequestBody @Valid DadosRemoverMedicoPaciente dados) {
-        Paciente paciente = pacienteRepository.findById(dados.paciente_id())
-                .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
-
-        paciente.setMedico(null);
+        pacienteService.removerMedico(dados);
 
         return ResponseEntity.noContent().build();
     }
