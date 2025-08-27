@@ -67,7 +67,7 @@ public class Usuario implements UserDetails {
         return UserDetails.super.isEnabled();
     }
 
-    public void atualizarUsuario(DadosAtualizarUsuario dados) {
+    public void atualizarInformacoes(DadosAtualizarUsuario dados) {
         if (dados.login() != null) {
             this.login = dados.login();
         }

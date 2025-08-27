@@ -42,7 +42,7 @@ public class PacienteService {
 
     public Paciente atualizar(DadosAtualizarPaciente dados) {
         Paciente paciente = pacienteRepository.getReferenceById(dados.id());
-        paciente.atualizarPaciente(dados);
+        paciente.atualizarInformacoes(dados);
 
         return paciente;
     }

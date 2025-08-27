@@ -5,7 +5,6 @@ import com.hospital.mateus.curso.remedio.dto.DadosCadastroRemedio;
 import com.hospital.mateus.curso.remedio.dto.DadosDetalhamentoRemedio;
 import com.hospital.mateus.curso.remedio.dto.DadosListagemRemedio;
 import com.hospital.mateus.curso.remedio.model.Remedio;
-import com.hospital.mateus.curso.remedio.repository.RemedioRepository;
 import com.hospital.mateus.curso.remedio.service.RemedioService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

@@ -43,7 +43,7 @@ public class Paciente extends Pessoa {
         );
     }
 
-    public void atualizarPaciente(@Valid DadosAtualizarPaciente dados) {
+    public void atualizarInformacoes(@Valid DadosAtualizarPaciente dados) {
         if (dados.nome() != null) {
             this.nome = dados.nome();
         }

@@ -1,14 +1,9 @@
 package com.hospital.mateus.curso.paciente.controller;
 
-import com.hospital.mateus.curso.medico.model.Medico;
 import com.hospital.mateus.curso.paciente.dto.*;
 import com.hospital.mateus.curso.paciente.model.Paciente;
 import com.hospital.mateus.curso.paciente.service.PacienteService;
 import com.hospital.mateus.curso.remedio.dto.DadosRemedio;
-import com.hospital.mateus.curso.remedio.model.Remedio;
-import com.hospital.mateus.curso.medico.repository.MedicoRepository;
-import com.hospital.mateus.curso.paciente.repository.PacienteRepository;
-import com.hospital.mateus.curso.remedio.repository.RemedioRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,12 +17,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/pacientes")
 public class PacienteController {
-
-    private final PacienteRepository pacienteRepository;
-
-    private final RemedioRepository remedioRepository;
-
-    private final MedicoRepository medicoRepository;
 
     private final PacienteService pacienteService;
 
