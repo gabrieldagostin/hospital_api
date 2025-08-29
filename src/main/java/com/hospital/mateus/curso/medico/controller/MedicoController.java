@@ -19,7 +19,6 @@ import com.hospital.mateus.curso.medico.dto.DadosCadastroMedico;
 import com.hospital.mateus.curso.medico.dto.DadosDetalhamentoMedico;
 import com.hospital.mateus.curso.medico.dto.DadosListagemMedico;
 import com.hospital.mateus.curso.medico.model.Medico;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RequiredArgsConstructor
@@ -30,19 +29,18 @@ public class MedicoController {
     private final MedicoService medicoService;
 
     @PostMapping
-    @Transactional
     public ResponseEntity<DadosDetalhamentoMedico> cadastrar(@RequestBody @Valid DadosCadastroMedico dados, UriComponentsBuilder uriBuilder) {
-        Medico medico = medicoService.cadastrar(dados);
+        DadosDetalhamentoMedico medico = medicoService.cadastrar(dados);
 
-        var uri = uriBuilder.path("/medicos/{id}").buildAndExpand(medico.getId()).toUri();
+        var uri = uriBuilder.path("/medicos/{id}").buildAndExpand(medico.id()).toUri();
 
-        return ResponseEntity.created(uri).body(new DadosDetalhamentoMedico(medico));
+        return ResponseEntity.created(uri).body(medico);
     }
 
 
     @GetMapping
     public ResponseEntity<List<DadosListagemMedico>> listar() {
-        var lista = medicoService.listar();
+        List<DadosListagemMedico> lista = medicoService.listar();
 
         return ResponseEntity.ok(lista);
     }
@@ -50,23 +48,21 @@ public class MedicoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<DadosDetalhamentoMedico> detalhar(@PathVariable("id") long id) {
-        Medico medico = medicoService.detalhar(id);
+        DadosDetalhamentoMedico medico = medicoService.detalhar(id);
 
-        return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));
+        return ResponseEntity.ok(medico);
     }
 
 
     @PutMapping
-    @Transactional
     public ResponseEntity<DadosDetalhamentoMedico> atualizar(@RequestBody @Valid DadosAtualizarMedico dados) {
-        Medico medico = medicoService.atualizar(dados);
+        DadosDetalhamentoMedico medico = medicoService.atualizar(dados);
 
-        return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));
+        return ResponseEntity.ok(medico);
     }
 
 
     @PutMapping("/ativar/{id}")
-    @Transactional
     public ResponseEntity<Void> ativar(@PathVariable("id") long id) {
         medicoService.ativar(id);
 
@@ -75,7 +71,6 @@ public class MedicoController {
 
 
     @DeleteMapping("/{id}")
-    @Transactional
     public ResponseEntity<Void> deletar(@PathVariable("id") long id) {
         medicoService.deletar(id);
 
@@ -84,7 +79,6 @@ public class MedicoController {
 
 
     @DeleteMapping("/desativar/{id}")
-    @Transactional
     public ResponseEntity<Void> desativar(@PathVariable("id") long id) {
         medicoService.desativar(id);
 

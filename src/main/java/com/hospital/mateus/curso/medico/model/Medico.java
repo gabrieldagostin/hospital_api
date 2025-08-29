@@ -24,18 +24,6 @@ public class Medico extends Funcionario {
     @Enumerated(EnumType.STRING)
     private Especialidade especialidade;
 
-    public Medico(DadosCadastroMedico dados) {
-        super(
-                dados.nome(),
-                dados.sexo(),
-                dados.dataNasc(),
-                dados.cpf(),
-                dados.salario());
-        this.crm = dados.crm();
-        this.especialidade = dados.especialidade();
-
-    }
-
     public void atualizarInformacoes(@Valid DadosAtualizarMedico dados) {
         if (dados.nome() != null) {
             setNome(dados.nome());
