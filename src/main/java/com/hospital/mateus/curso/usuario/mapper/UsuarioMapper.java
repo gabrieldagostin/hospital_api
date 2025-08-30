@@ -10,9 +10,7 @@ import org.mapstruct.Mapper;
 public interface UsuarioMapper {
 
     Usuario toEntity(DadosCadastroUsuario dto);
-
     DadosDetalhamentoUsuario toDetalhamentoDto(Usuario usuario);
-
     DadosListagemUsuario toListagemDto(Usuario usuario);
 
 

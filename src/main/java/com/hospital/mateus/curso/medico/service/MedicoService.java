@@ -4,10 +4,10 @@ import com.hospital.mateus.curso.medico.dto.DadosAtualizarMedico;
 import com.hospital.mateus.curso.medico.dto.DadosCadastroMedico;
 import com.hospital.mateus.curso.medico.dto.DadosDetalhamentoMedico;
 import com.hospital.mateus.curso.medico.dto.DadosListagemMedico;
+import com.hospital.mateus.curso.medico.mapper.MedicoMapper;
 import com.hospital.mateus.curso.medico.model.Medico;
 import com.hospital.mateus.curso.medico.repository.MedicoRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,28 +20,28 @@ public class MedicoService {
 
     private final MedicoRepository medicoRepository;
 
-    private final ModelMapper modelMapper;
+    private final MedicoMapper medicoMapper;
 
 
     @Transactional
     public DadosDetalhamentoMedico cadastrar(DadosCadastroMedico dados) {
-        Medico medico = modelMapper.map(dados, Medico.class);
+        Medico medico = medicoMapper.toEntity(dados);
         medicoRepository.save(medico);
 
-        return modelMapper.map(medico, DadosDetalhamentoMedico.class);
+        return medicoMapper.toDetalhamentoDto(medico);
     }
 
 
     public List<DadosListagemMedico> listar() {
         return medicoRepository.findAllByAtivoTrue().stream().map(
-                medico -> modelMapper.map(medico, DadosListagemMedico.class)).toList();
+                medico -> medicoMapper.toListagemDto(medico)).toList();
     }
 
 
     public DadosDetalhamentoMedico detalhar(Long id) {
         Medico medico = medicoRepository.getReferenceById(id);
 
-        return modelMapper.map(medico, DadosDetalhamentoMedico.class);
+        return medicoMapper.toDetalhamentoDto(medico);
     }
 
 
@@ -50,7 +50,7 @@ public class MedicoService {
         Medico medico = medicoRepository.getReferenceById(dados.id());
         medico.atualizarInformacoes(dados);
 
-        return modelMapper.map(medico, DadosDetalhamentoMedico.class);
+        return medicoMapper.toDetalhamentoDto(medico);
     }
 
 

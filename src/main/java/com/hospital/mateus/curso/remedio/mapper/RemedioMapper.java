@@ -10,8 +10,6 @@ import org.mapstruct.Mapper;
 public interface RemedioMapper {
 
     Remedio toEntity(DadosCadastroRemedio dto);
-
     DadosDetalhamentoRemedio toDetalhamentoDto(Remedio remedio);
-
     DadosListagemRemedio toListagemDto(Remedio remedio);
 }
