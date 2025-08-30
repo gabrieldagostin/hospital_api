@@ -1,10 +1,8 @@
 package com.hospital.mateus.curso.paciente.controller;
 
 import com.hospital.mateus.curso.paciente.dto.*;
-import com.hospital.mateus.curso.paciente.model.Paciente;
 import com.hospital.mateus.curso.paciente.service.PacienteService;
 import com.hospital.mateus.curso.remedio.dto.DadosRemedio;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,23 +16,23 @@ import java.util.List;
 @RequestMapping("/pacientes")
 public class PacienteController {
 
+
     private final PacienteService pacienteService;
 
 
     @PostMapping
-    @Transactional
     public ResponseEntity<DadosDetalhamentoPaciente> cadastrar(@RequestBody @Valid DadosCadastroPaciente dados, UriComponentsBuilder uriBuilder) {
-        Paciente paciente = pacienteService.cadastrar(dados);
+        DadosDetalhamentoPaciente paciente = pacienteService.cadastrar(dados);
 
-        var uri = uriBuilder.path("/pacientes/{id}").buildAndExpand(paciente.getId()).toUri();
+        var uri = uriBuilder.path("/pacientes/{id}").buildAndExpand(paciente.id()).toUri();
 
-        return ResponseEntity.created(uri).body(new @Valid DadosDetalhamentoPaciente(paciente));
+        return ResponseEntity.created(uri).body(paciente);
     }
 
 
     @GetMapping
     public ResponseEntity<List<DadosListagemPaciente>> listar() {
-        var lista = pacienteService.listar();
+        List<DadosListagemPaciente> lista = pacienteService.listar();
 
         return ResponseEntity.ok(lista);
     }
@@ -42,23 +40,21 @@ public class PacienteController {
 
     @GetMapping("/{id}")
     public ResponseEntity<DadosDetalhamentoPaciente> detalhar(@PathVariable("id") long id) {
-        Paciente paciente = pacienteService.detalhar(id);
+        DadosDetalhamentoPaciente paciente = pacienteService.detalhar(id);
 
-        return ResponseEntity.ok(new DadosDetalhamentoPaciente(paciente));
+        return ResponseEntity.ok(paciente);
     }
 
 
     @PutMapping
-    @Transactional
     public ResponseEntity<DadosDetalhamentoPaciente> atualizar(@RequestBody @Valid DadosAtualizarPaciente dados) {
-        Paciente paciente = pacienteService.atualizar(dados);
+        DadosDetalhamentoPaciente paciente = pacienteService.atualizar(dados);
 
-        return ResponseEntity.ok(new @Valid DadosDetalhamentoPaciente(paciente));
+        return ResponseEntity.ok(paciente);
     }
 
 
     @PutMapping("/ativar/{id}")
-    @Transactional
     public ResponseEntity<Void> ativar(@PathVariable("id") long id) {
         pacienteService.ativar(id);
 
@@ -67,7 +63,6 @@ public class PacienteController {
 
 
     @DeleteMapping("/desativar/{id}")
-    @Transactional
     public ResponseEntity<Void> desativar(@PathVariable("id") long id) {
         pacienteService.desativar(id);
 
@@ -76,7 +71,6 @@ public class PacienteController {
 
 
     @DeleteMapping("/{id}")
-    @Transactional
     public ResponseEntity<Void> deletar(@PathVariable("id") long id) {
         pacienteService.deletar(id);
 
@@ -85,7 +79,6 @@ public class PacienteController {
 
 
     @PatchMapping("/associar-remedio")
-    @Transactional
     public ResponseEntity<Void> associarRemedio(@RequestBody @Valid DadosAssociarRemedioPaciente dados) {
         pacienteService.associarRemedio(dados);
 
@@ -94,7 +87,6 @@ public class PacienteController {
 
 
     @DeleteMapping("/remover-remedio")
-    @Transactional
     public ResponseEntity<Void> removerRemedio(@RequestBody @Valid DadosAssociarRemedioPaciente dados) {
         pacienteService.removerRemedio(dados);
 
@@ -111,7 +103,6 @@ public class PacienteController {
 
 
     @PatchMapping("/associar-medico")
-    @Transactional
     public ResponseEntity<Void> associarMedico(@RequestBody @Valid DadosAssociarMedicoPaciente dados) {
         pacienteService.associarMedico(dados);
 
@@ -121,7 +112,6 @@ public class PacienteController {
 
 
     @DeleteMapping("/remover-medico")
-    @Transactional
     public ResponseEntity<Void> removerMedico(@RequestBody @Valid DadosRemoverMedicoPaciente dados) {
         pacienteService.removerMedico(dados);
 

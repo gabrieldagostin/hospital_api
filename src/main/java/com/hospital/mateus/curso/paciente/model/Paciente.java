@@ -34,15 +34,6 @@ public class Paciente extends Pessoa {
     @JoinColumn(name = "medico_id")
     private Medico medico;
 
-    public Paciente(DadosCadastroPaciente dados) {
-        super(
-                dados.nome(),
-                dados.sexo(),
-                dados.dataNasc(),
-                dados.cpf()
-        );
-    }
-
     public void atualizarInformacoes(@Valid DadosAtualizarPaciente dados) {
         if (dados.nome() != null) {
             this.nome = dados.nome();
