@@ -8,7 +8,6 @@ import com.hospital.mateus.curso.usuario.mapper.UsuarioMapper;
 import com.hospital.mateus.curso.usuario.model.Usuario;
 import com.hospital.mateus.curso.usuario.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

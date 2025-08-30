@@ -3,13 +3,13 @@ package com.hospital.mateus.curso.paciente.service;
 import com.hospital.mateus.curso.medico.model.Medico;
 import com.hospital.mateus.curso.medico.repository.MedicoRepository;
 import com.hospital.mateus.curso.paciente.dto.*;
+import com.hospital.mateus.curso.paciente.mapper.PacienteMapper;
 import com.hospital.mateus.curso.paciente.model.Paciente;
 import com.hospital.mateus.curso.paciente.repository.PacienteRepository;
 import com.hospital.mateus.curso.remedio.dto.DadosRemedio;
 import com.hospital.mateus.curso.remedio.model.Remedio;
 import com.hospital.mateus.curso.remedio.repository.RemedioRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,28 +26,28 @@ public class PacienteService {
 
     private final MedicoRepository medicoRepository;
 
-    private final ModelMapper modelMapper;
+    private final PacienteMapper pacienteMapper;
 
 
     @Transactional
     public DadosDetalhamentoPaciente cadastrar(DadosCadastroPaciente dados) {
-        Paciente paciente = modelMapper.map(dados, Paciente.class);
+        Paciente paciente = pacienteMapper.toEntity(dados);
         pacienteRepository.save(paciente);
 
-        return modelMapper.map(paciente, DadosDetalhamentoPaciente.class);
+        return pacienteMapper.toDetalhamentoDto(paciente);
     }
 
 
     public List<DadosListagemPaciente> listar() {
         return pacienteRepository.findAllByAtivoTrue().stream().map(
-                paciente -> modelMapper.map(paciente, DadosListagemPaciente.class)).toList();
+                paciente -> pacienteMapper.toListagemDto(paciente)).toList();
     }
 
 
     public DadosDetalhamentoPaciente detalhar(Long id) {
         Paciente paciente = pacienteRepository.getReferenceById(id);
 
-        return modelMapper.map(paciente, DadosDetalhamentoPaciente.class);
+        return pacienteMapper.toDetalhamentoDto(paciente);
     }
 
 
@@ -56,7 +56,7 @@ public class PacienteService {
         Paciente paciente = pacienteRepository.getReferenceById(dados.id());
         paciente.atualizarInformacoes(dados);
 
-        return modelMapper.map(paciente, DadosDetalhamentoPaciente.class);
+        return pacienteMapper.toDetalhamentoDto(paciente);
     }
 
 
@@ -113,7 +113,7 @@ public class PacienteService {
                 .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
 
         List<DadosRemedio> lista = paciente.getRemedios().stream()
-                .map(remedio -> modelMapper.map(remedio, DadosRemedio.class)).toList();
+                .map(remedio -> pacienteMapper.toDadosRemedioDto(remedio)).toList();
 
         return lista;
     }

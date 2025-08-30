@@ -2,7 +2,6 @@ package com.hospital.mateus.curso.paciente.model;
 
 import com.hospital.mateus.curso.core.model.Pessoa;
 import com.hospital.mateus.curso.paciente.dto.DadosAtualizarPaciente;
-import com.hospital.mateus.curso.paciente.dto.DadosCadastroPaciente;
 import com.hospital.mateus.curso.medico.model.Medico;
 import com.hospital.mateus.curso.remedio.model.Remedio;
 import jakarta.persistence.*;

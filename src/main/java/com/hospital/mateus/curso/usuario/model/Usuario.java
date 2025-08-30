@@ -1,9 +1,7 @@
 package com.hospital.mateus.curso.usuario.model;
 
 import com.hospital.mateus.curso.usuario.dto.DadosAtualizarUsuario;
-import com.hospital.mateus.curso.usuario.dto.DadosCadastroUsuario;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

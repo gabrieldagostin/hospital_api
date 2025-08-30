@@ -3,7 +3,6 @@ package com.hospital.mateus.curso.medico.model;
 import com.hospital.mateus.curso.core.model.Funcionario;
 import com.hospital.mateus.curso.core.enums.Especialidade;
 import com.hospital.mateus.curso.medico.dto.DadosAtualizarMedico;
-import com.hospital.mateus.curso.medico.dto.DadosCadastroMedico;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
