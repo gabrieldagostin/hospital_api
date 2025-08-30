@@ -4,9 +4,7 @@ import com.hospital.mateus.curso.remedio.dto.DadosAtualizarRemedio;
 import com.hospital.mateus.curso.remedio.dto.DadosCadastroRemedio;
 import com.hospital.mateus.curso.remedio.dto.DadosDetalhamentoRemedio;
 import com.hospital.mateus.curso.remedio.dto.DadosListagemRemedio;
-import com.hospital.mateus.curso.remedio.model.Remedio;
 import com.hospital.mateus.curso.remedio.service.RemedioService;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +18,11 @@ import java.util.List;
 @RequestMapping("/remedios")
 public class RemedioController {
 
+
     private final RemedioService remedioService;
 
 
     @PostMapping
-    @Transactional
     public ResponseEntity<DadosDetalhamentoRemedio> cadastrar(@RequestBody @Valid DadosCadastroRemedio dados, UriComponentsBuilder uriBuilder) {
         DadosDetalhamentoRemedio remedio = remedioService.cadastrar(dados);
 
@@ -51,7 +49,6 @@ public class RemedioController {
 
 
     @PutMapping
-    @Transactional
     public ResponseEntity<DadosDetalhamentoRemedio> atualizar(@RequestBody @Valid DadosAtualizarRemedio dados) {
         DadosDetalhamentoRemedio remedio = remedioService.atualizarRemedio(dados);
 
@@ -60,7 +57,6 @@ public class RemedioController {
 
 
     @PutMapping("/ativar/{id}")
-    @Transactional
     public ResponseEntity<Void> ativar(@PathVariable("id") long id) {
         remedioService.ativar(id);
 
@@ -69,7 +65,6 @@ public class RemedioController {
 
 
     @DeleteMapping("/{id}")
-    @Transactional
     public ResponseEntity<Void> deletar(@PathVariable("id") long id) {
         remedioService.deletar(id);
 
@@ -78,7 +73,6 @@ public class RemedioController {
 
 
     @DeleteMapping("desativar/{id}")
-    @Transactional
     public ResponseEntity<Void> desativar(@PathVariable("id") long id) {
         remedioService.desativar(id);
 

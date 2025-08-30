@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,10 +18,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RemedioService {
 
+
     private final RemedioRepository remedioRepository;
 
     private final ModelMapper modelMapper;
 
+
+    @Transactional
     public DadosDetalhamentoRemedio cadastrar(@Valid DadosCadastroRemedio dados) {
         Remedio remedio = modelMapper.map(dados, Remedio.class);
         remedioRepository.save(remedio);
@@ -42,6 +46,7 @@ public class RemedioService {
     }
 
 
+    @Transactional
     public DadosDetalhamentoRemedio atualizarRemedio(DadosAtualizarRemedio dados) {
         Remedio remedio = remedioRepository.getReferenceById(dados.id());
         remedio.atualizarInformacoes(dados);
@@ -50,17 +55,20 @@ public class RemedioService {
     }
 
 
+    @Transactional
     public void ativar(Long id) {
         Remedio remedio = remedioRepository.getReferenceById(id);
         remedio.ativar();
     }
 
 
+    @Transactional
     public void deletar(Long id) {
         remedioRepository.deleteById(id);
     }
 
 
+    @Transactional
     public void desativar(Long id) {
         Remedio remedio = remedioRepository.getReferenceById(id);
         remedio.desativar();
