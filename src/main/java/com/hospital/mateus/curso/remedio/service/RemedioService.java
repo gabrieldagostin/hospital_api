@@ -4,11 +4,11 @@ import com.hospital.mateus.curso.remedio.dto.DadosAtualizarRemedio;
 import com.hospital.mateus.curso.remedio.dto.DadosCadastroRemedio;
 import com.hospital.mateus.curso.remedio.dto.DadosDetalhamentoRemedio;
 import com.hospital.mateus.curso.remedio.dto.DadosListagemRemedio;
+import com.hospital.mateus.curso.remedio.mapper.RemedioMapper;
 import com.hospital.mateus.curso.remedio.model.Remedio;
 import com.hospital.mateus.curso.remedio.repository.RemedioRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,28 +21,28 @@ public class RemedioService {
 
     private final RemedioRepository remedioRepository;
 
-    private final ModelMapper modelMapper;
+    private final RemedioMapper remedioMapper;
 
 
     @Transactional
     public DadosDetalhamentoRemedio cadastrar(@Valid DadosCadastroRemedio dados) {
-        Remedio remedio = modelMapper.map(dados, Remedio.class);
+        Remedio remedio = remedioMapper.toEntity(dados);
         remedioRepository.save(remedio);
 
-        return modelMapper.map(remedio, DadosDetalhamentoRemedio.class);
+        return remedioMapper.toDetalhamentoDto(remedio);
     }
 
 
     public List<DadosListagemRemedio> listar() {
         return remedioRepository.findAllByAtivoTrue().stream().map(
-                remedio -> modelMapper.map(remedio, DadosListagemRemedio.class)).toList();
+                remedio -> remedioMapper.toListagemDto(remedio)).toList();
     }
 
 
     public DadosDetalhamentoRemedio detalhar(Long id) {
         Remedio remedio = remedioRepository.getReferenceById(id);
 
-        return modelMapper.map(remedio, DadosDetalhamentoRemedio.class);
+        return remedioMapper.toDetalhamentoDto(remedio);
     }
 
 
@@ -51,7 +51,7 @@ public class RemedioService {
         Remedio remedio = remedioRepository.getReferenceById(dados.id());
         remedio.atualizarInformacoes(dados);
 
-        return modelMapper.map(remedio, DadosDetalhamentoRemedio.class);
+        return remedioMapper.toDetalhamentoDto(remedio);
     }
 
 
