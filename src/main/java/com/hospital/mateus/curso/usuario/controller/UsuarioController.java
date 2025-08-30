@@ -25,19 +25,19 @@ public class UsuarioController {
     @PostMapping
     @Transactional
     public ResponseEntity<DadosDetalhamentoUsuario> cadastrar(@Valid @RequestBody DadosCadastroUsuario dados, UriComponentsBuilder uriComponentsBuilder) {
-        Usuario usuario = usuarioService.cadastrar(dados);
+        DadosDetalhamentoUsuario usuario = usuarioService.cadastrar(dados);
 
-        var uri = uriComponentsBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
+        var uri = uriComponentsBuilder.path("/usuarios/{id}").buildAndExpand(usuario.id()).toUri();
 
-        return ResponseEntity.created(uri).body(new @Valid DadosDetalhamentoUsuario(usuario));
+        return ResponseEntity.created(uri).body(usuario);
     }
 
 
     @GetMapping("/{id}")
     public ResponseEntity<DadosDetalhamentoUsuario> detalhar(@PathVariable("id") long id) {
-        Usuario usuario = usuarioService.detalhar(id);
+        DadosDetalhamentoUsuario usuario = usuarioService.detalhar(id);
 
-        return ResponseEntity.ok(new DadosDetalhamentoUsuario(usuario));
+        return ResponseEntity.ok(usuario);
     }
 
 
@@ -52,9 +52,9 @@ public class UsuarioController {
     @PutMapping
     @Transactional
     public ResponseEntity<DadosDetalhamentoUsuario> atualizar(@RequestBody @Valid DadosAtualizarUsuario dados) {
-        Usuario usuario = usuarioService.atualizar(dados);
+        DadosDetalhamentoUsuario usuario = usuarioService.atualizar(dados);
 
-        return ResponseEntity.ok(new DadosDetalhamentoUsuario(usuario));
+        return ResponseEntity.ok(usuario);
     }
 
 

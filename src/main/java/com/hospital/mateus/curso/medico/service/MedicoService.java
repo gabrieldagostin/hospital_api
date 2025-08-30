@@ -30,7 +30,8 @@ public class MedicoService {
     }
 
     public List<DadosListagemMedico> listar() {
-        return medicoRepository.findAllByAtivoTrue().stream().map(medico -> modelMapper.map(medico, DadosListagemMedico.class)).toList();
+        return medicoRepository.findAllByAtivoTrue().stream().map(
+                medico -> modelMapper.map(medico, DadosListagemMedico.class)).toList();
     }
 
     public DadosDetalhamentoMedico detalhar(Long id) {
