@@ -4,9 +4,7 @@ import com.hospital.mateus.curso.usuario.dto.DadosAtualizarUsuario;
 import com.hospital.mateus.curso.usuario.dto.DadosCadastroUsuario;
 import com.hospital.mateus.curso.usuario.dto.DadosDetalhamentoUsuario;
 import com.hospital.mateus.curso.usuario.dto.DadosListagemUsuario;
-import com.hospital.mateus.curso.usuario.model.Usuario;
 import com.hospital.mateus.curso.usuario.service.UsuarioService;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +18,11 @@ import java.util.List;
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
+
     private final UsuarioService usuarioService;
 
+
     @PostMapping
-    @Transactional
     public ResponseEntity<DadosDetalhamentoUsuario> cadastrar(@Valid @RequestBody DadosCadastroUsuario dados, UriComponentsBuilder uriComponentsBuilder) {
         DadosDetalhamentoUsuario usuario = usuarioService.cadastrar(dados);
 
@@ -50,7 +49,6 @@ public class UsuarioController {
 
 
     @PutMapping
-    @Transactional
     public ResponseEntity<DadosDetalhamentoUsuario> atualizar(@RequestBody @Valid DadosAtualizarUsuario dados) {
         DadosDetalhamentoUsuario usuario = usuarioService.atualizar(dados);
 

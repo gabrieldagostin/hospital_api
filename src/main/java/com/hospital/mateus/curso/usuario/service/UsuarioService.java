@@ -17,17 +17,20 @@ import java.util.List;
 @Service
 public class UsuarioService {
 
+
     private final UsuarioRepository usuarioRepository;
 
     private final ModelMapper modelMapper;
 
+
     @Transactional
     public DadosDetalhamentoUsuario cadastrar(DadosCadastroUsuario dados) {
-        Usuario usuario = new Usuario(dados);
+        Usuario usuario = modelMapper.map(dados, Usuario.class);
         usuarioRepository.save(usuario);
 
         return modelMapper.map(usuario, DadosDetalhamentoUsuario.class);
     }
+
 
     public DadosDetalhamentoUsuario detalhar(Long id) {
             Usuario usuario = usuarioRepository.getReferenceById(id);
@@ -35,10 +38,12 @@ public class UsuarioService {
             return modelMapper.map(usuario, DadosDetalhamentoUsuario.class);
     }
 
+
     public List<DadosListagemUsuario> listar() {
         return usuarioRepository.findAll().stream().map(
                 usuario -> modelMapper.map(usuario, DadosListagemUsuario.class)).toList();
     }
+
 
     @Transactional
     public DadosDetalhamentoUsuario atualizar(DadosAtualizarUsuario dados) {
@@ -47,6 +52,7 @@ public class UsuarioService {
 
         return modelMapper.map(usuario, DadosDetalhamentoUsuario.class);
     }
+
 
     @Transactional
     public void deletar(Long id) {

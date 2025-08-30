@@ -27,11 +27,6 @@ public class Usuario implements UserDetails {
     private String login;
     private String senha;
 
-    public Usuario(@Valid DadosCadastroUsuario dados) {
-        this.login = dados.login();
-        this.senha = dados.senha();
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
