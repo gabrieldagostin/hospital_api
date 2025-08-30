@@ -39,16 +39,6 @@ public class Remedio {
     private List<Paciente> pacientes = new ArrayList<>();
     private boolean ativo;
 
-    public Remedio(DadosCadastroRemedio dados) {
-        this.nome = dados.nome();
-        this.via = dados.via();
-        this.lote = dados.lote();
-        this.quantidade = dados.quantidade();
-        this.validade = dados.validade();
-        this.laboratorio = dados.laboratorio();
-        this.ativo = true;
-    }
-
     public void atualizarInformacoes(@Valid DadosAtualizarRemedio dados) {
         if (dados.nome() != null) {
             this.nome = dados.nome();

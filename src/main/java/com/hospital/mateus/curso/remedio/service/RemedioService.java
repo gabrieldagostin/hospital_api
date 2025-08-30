@@ -2,11 +2,13 @@ package com.hospital.mateus.curso.remedio.service;
 
 import com.hospital.mateus.curso.remedio.dto.DadosAtualizarRemedio;
 import com.hospital.mateus.curso.remedio.dto.DadosCadastroRemedio;
+import com.hospital.mateus.curso.remedio.dto.DadosDetalhamentoRemedio;
 import com.hospital.mateus.curso.remedio.dto.DadosListagemRemedio;
 import com.hospital.mateus.curso.remedio.model.Remedio;
 import com.hospital.mateus.curso.remedio.repository.RemedioRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,30 +19,34 @@ public class RemedioService {
 
     private final RemedioRepository remedioRepository;
 
+    private final ModelMapper modelMapper;
 
-    public Remedio cadastrar(@Valid DadosCadastroRemedio dados) {
-        Remedio remedio = new Remedio(dados);
+    public DadosDetalhamentoRemedio cadastrar(@Valid DadosCadastroRemedio dados) {
+        Remedio remedio = modelMapper.map(dados, Remedio.class);
         remedioRepository.save(remedio);
 
-        return remedio;
+        return modelMapper.map(remedio, DadosDetalhamentoRemedio.class);
     }
 
 
     public List<DadosListagemRemedio> listar() {
-        return remedioRepository.findAllByAtivoTrue().stream().map(DadosListagemRemedio::new).toList();
+        return remedioRepository.findAllByAtivoTrue().stream().map(
+                remedio -> modelMapper.map(remedio, DadosListagemRemedio.class)).toList();
     }
 
 
-    public Remedio detalhar(Long id) {
-        return remedioRepository.getReferenceById(id);
+    public DadosDetalhamentoRemedio detalhar(Long id) {
+        Remedio remedio = remedioRepository.getReferenceById(id);
+
+        return modelMapper.map(remedio, DadosDetalhamentoRemedio.class);
     }
 
 
-    public Remedio atualizarRemedio(DadosAtualizarRemedio dados) {
+    public DadosDetalhamentoRemedio atualizarRemedio(DadosAtualizarRemedio dados) {
         Remedio remedio = remedioRepository.getReferenceById(dados.id());
         remedio.atualizarInformacoes(dados);
 
-        return remedio;
+        return modelMapper.map(remedio, DadosDetalhamentoRemedio.class);
     }
 
 

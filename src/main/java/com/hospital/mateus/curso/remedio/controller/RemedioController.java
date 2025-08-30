@@ -26,11 +26,11 @@ public class RemedioController {
     @PostMapping
     @Transactional
     public ResponseEntity<DadosDetalhamentoRemedio> cadastrar(@RequestBody @Valid DadosCadastroRemedio dados, UriComponentsBuilder uriBuilder) {
-        Remedio remedio = remedioService.cadastrar(dados);
+        DadosDetalhamentoRemedio remedio = remedioService.cadastrar(dados);
 
-        var uri = uriBuilder.path("/remedios/{id}").buildAndExpand(remedio.getId()).toUri();
+        var uri = uriBuilder.path("/remedios/{id}").buildAndExpand(remedio.id()).toUri();
 
-        return ResponseEntity.created(uri).body(new DadosDetalhamentoRemedio(remedio));
+        return ResponseEntity.created(uri).body(remedio);
     }
 
 
@@ -44,18 +44,18 @@ public class RemedioController {
 
     @GetMapping("/{id}")
     public ResponseEntity<DadosDetalhamentoRemedio> detalhar(@PathVariable("id") long id) {
-        Remedio remedio = remedioService.detalhar(id);
+        DadosDetalhamentoRemedio remedio = remedioService.detalhar(id);
 
-        return ResponseEntity.ok(new DadosDetalhamentoRemedio(remedio));
+        return ResponseEntity.ok(remedio);
     }
 
 
     @PutMapping
     @Transactional
     public ResponseEntity<DadosDetalhamentoRemedio> atualizar(@RequestBody @Valid DadosAtualizarRemedio dados) {
-        Remedio remedio = remedioService.atualizarRemedio(dados);
+        DadosDetalhamentoRemedio remedio = remedioService.atualizarRemedio(dados);
 
-        return ResponseEntity.ok(new DadosDetalhamentoRemedio(remedio));
+        return ResponseEntity.ok(remedio);
     }
 
 
