@@ -1,12 +1,12 @@
 package com.hospital.mateus.curso.remedio.model;
 
 import com.hospital.mateus.curso.remedio.dto.DadosAtualizarRemedio;
-import com.hospital.mateus.curso.remedio.dto.DadosCadastroRemedio;
 import com.hospital.mateus.curso.paciente.model.Paciente;
 import com.hospital.mateus.curso.core.enums.Laboratorio;
 import com.hospital.mateus.curso.core.enums.Via;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Future;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -31,6 +31,7 @@ public class Remedio {
     private Via via;
     private String lote;
     private int quantidade;
+    @Future
     private LocalDate validade;
 
     @Enumerated(EnumType.STRING)

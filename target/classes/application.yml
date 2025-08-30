@@ -4,7 +4,7 @@ api:
             secret: ${JWT_Secret:123456}
 server:
     error:
-        include-stacktrace: never
+        include-stacktrace: NEVER
 spring:
     application:
         name: CursoSpringBoot - teste

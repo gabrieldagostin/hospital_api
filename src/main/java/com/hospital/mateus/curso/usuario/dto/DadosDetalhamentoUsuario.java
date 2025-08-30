@@ -20,4 +20,5 @@ public record DadosDetalhamentoUsuario(
             usuario.getSenha()
         );
     }
+
 }

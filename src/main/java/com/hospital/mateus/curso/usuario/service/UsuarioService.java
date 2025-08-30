@@ -4,6 +4,7 @@ import com.hospital.mateus.curso.usuario.dto.DadosAtualizarUsuario;
 import com.hospital.mateus.curso.usuario.dto.DadosCadastroUsuario;
 import com.hospital.mateus.curso.usuario.dto.DadosDetalhamentoUsuario;
 import com.hospital.mateus.curso.usuario.dto.DadosListagemUsuario;
+import com.hospital.mateus.curso.usuario.mapper.UsuarioMapper;
 import com.hospital.mateus.curso.usuario.model.Usuario;
 import com.hospital.mateus.curso.usuario.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,28 +21,29 @@ public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
 
-    private final ModelMapper modelMapper;
+    private final UsuarioMapper usuarioMapper;
 
 
     @Transactional
     public DadosDetalhamentoUsuario cadastrar(DadosCadastroUsuario dados) {
-        Usuario usuario = modelMapper.map(dados, Usuario.class);
+        Usuario usuario = usuarioMapper.toEntity(dados);
         usuarioRepository.save(usuario);
 
-        return modelMapper.map(usuario, DadosDetalhamentoUsuario.class);
+        return usuarioMapper.toDetalhamentoDto(usuario);
     }
+
 
 
     public DadosDetalhamentoUsuario detalhar(Long id) {
             Usuario usuario = usuarioRepository.getReferenceById(id);
 
-            return modelMapper.map(usuario, DadosDetalhamentoUsuario.class);
+            return usuarioMapper.toDetalhamentoDto(usuario);
     }
 
 
     public List<DadosListagemUsuario> listar() {
         return usuarioRepository.findAll().stream().map(
-                usuario -> modelMapper.map(usuario, DadosListagemUsuario.class)).toList();
+                usuario -> usuarioMapper.toListagemDto(usuario)).toList();
     }
 
 
@@ -50,7 +52,7 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.getReferenceById(dados.id());
         usuario.atualizarInformacoes(dados);
 
-        return modelMapper.map(usuario, DadosDetalhamentoUsuario.class);
+        return usuarioMapper.toDetalhamentoDto(usuario);
     }
 
 
