@@ -18,7 +18,6 @@ import com.hospital.mateus.curso.medico.dto.DadosAtualizarMedico;
 import com.hospital.mateus.curso.medico.dto.DadosCadastroMedico;
 import com.hospital.mateus.curso.medico.dto.DadosDetalhamentoMedico;
 import com.hospital.mateus.curso.medico.dto.DadosListagemMedico;
-import com.hospital.mateus.curso.medico.model.Medico;
 import jakarta.validation.Valid;
 
 @RequiredArgsConstructor
@@ -26,7 +25,9 @@ import jakarta.validation.Valid;
 @RequestMapping("/medicos")
 public class MedicoController {
 
+
     private final MedicoService medicoService;
+
 
     @PostMapping
     public ResponseEntity<DadosDetalhamentoMedico> cadastrar(@RequestBody @Valid DadosCadastroMedico dados, UriComponentsBuilder uriBuilder) {

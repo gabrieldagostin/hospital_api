@@ -17,9 +17,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MedicoService {
 
+
     private final MedicoRepository medicoRepository;
 
     private final ModelMapper modelMapper;
+
 
     @Transactional
     public DadosDetalhamentoMedico cadastrar(DadosCadastroMedico dados) {
@@ -29,16 +31,19 @@ public class MedicoService {
         return modelMapper.map(medico, DadosDetalhamentoMedico.class);
     }
 
+
     public List<DadosListagemMedico> listar() {
         return medicoRepository.findAllByAtivoTrue().stream().map(
                 medico -> modelMapper.map(medico, DadosListagemMedico.class)).toList();
     }
+
 
     public DadosDetalhamentoMedico detalhar(Long id) {
         Medico medico = medicoRepository.getReferenceById(id);
 
         return modelMapper.map(medico, DadosDetalhamentoMedico.class);
     }
+
 
     @Transactional
     public DadosDetalhamentoMedico atualizar(DadosAtualizarMedico dados) {
@@ -48,16 +53,21 @@ public class MedicoService {
         return modelMapper.map(medico, DadosDetalhamentoMedico.class);
     }
 
+
+    @Transactional
     public void ativar(Long id) {
         Medico medico = medicoRepository.getReferenceById(id);
         medico.ativar();
     }
+
 
     @Transactional
     public void deletar(Long id) {
         medicoRepository.deleteById(id);
     }
 
+
+    @Transactional
     public void desativar(Long id) {
         Medico medico = medicoRepository.getReferenceById(id);
         medico.desativar();
