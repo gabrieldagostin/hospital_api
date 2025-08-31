@@ -15,9 +15,9 @@ public record DadosDetalhamentoUsuario(
 
     public DadosDetalhamentoUsuario(Usuario usuario) {
         this(
-            usuario.getId(),
-            usuario.getLogin(),
-            usuario.getSenha()
+                usuario.getId(),
+                usuario.getLogin(),
+                usuario.getSenha()
         );
     }
 

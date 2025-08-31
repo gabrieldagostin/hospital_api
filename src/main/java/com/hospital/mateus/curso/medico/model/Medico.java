@@ -7,10 +7,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -23,11 +24,11 @@ public class Medico extends Funcionario {
     @Enumerated(EnumType.STRING)
     private Especialidade especialidade;
 
-    public void atualizarInformacoes(@Valid DadosAtualizarMedico dados) {
-        if (dados.nome() != null) {
+    public void atualizarInformacoes(DadosAtualizarMedico dados) {
+        if (dados.nome() != null && !Objects.equals(this.nome, dados.nome())) {
             setNome(dados.nome());
         }
-        if (dados.salario() != null) {
+        if (dados.salario() != null && !Objects.equals(this.salario, dados.salario())) {
             setSalario(dados.salario());
         }
     }

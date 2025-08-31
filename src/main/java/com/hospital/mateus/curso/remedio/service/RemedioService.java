@@ -7,7 +7,6 @@ import com.hospital.mateus.curso.remedio.dto.DadosListagemRemedio;
 import com.hospital.mateus.curso.remedio.mapper.RemedioMapper;
 import com.hospital.mateus.curso.remedio.model.Remedio;
 import com.hospital.mateus.curso.remedio.repository.RemedioRepository;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,8 +24,9 @@ public class RemedioService {
 
 
     @Transactional
-    public DadosDetalhamentoRemedio cadastrar(@Valid DadosCadastroRemedio dados) {
+    public DadosDetalhamentoRemedio cadastrar(DadosCadastroRemedio dados) {
         Remedio remedio = remedioMapper.toEntity(dados);
+        remedio.ativar();
         remedioRepository.save(remedio);
 
         return remedioMapper.toDetalhamentoDto(remedio);
@@ -35,7 +35,7 @@ public class RemedioService {
 
     public List<DadosListagemRemedio> listar() {
         return remedioRepository.findAllByAtivoTrue().stream().map(
-                remedio -> remedioMapper.toListagemDto(remedio)).toList();
+                remedioMapper::toListagemDto).toList();
     }
 
 

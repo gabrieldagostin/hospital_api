@@ -42,7 +42,7 @@ public class UsuarioService {
 
     public List<DadosListagemUsuario> listar() {
         return usuarioRepository.findAll().stream().map(
-                usuario -> usuarioMapper.toListagemDto(usuario)).toList();
+                usuarioMapper::toListagemDto).toList();
     }
 
 

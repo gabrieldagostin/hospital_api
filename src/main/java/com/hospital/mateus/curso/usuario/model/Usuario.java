@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Table(name = "usuarios")
 @Entity()
@@ -61,10 +62,10 @@ public class Usuario implements UserDetails {
     }
 
     public void atualizarInformacoes(DadosAtualizarUsuario dados) {
-        if (dados.login() != null) {
+        if (dados.login() != null && !Objects.equals(this.login, dados.login())) {
             this.login = dados.login();
         }
-        if (dados.senha() != null) {
+        if (dados.senha() != null && !Objects.equals(this.senha, dados.senha())) {
             this.senha = dados.senha();
         }
     }

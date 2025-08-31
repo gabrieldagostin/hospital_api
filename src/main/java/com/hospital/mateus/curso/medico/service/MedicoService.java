@@ -26,6 +26,7 @@ public class MedicoService {
     @Transactional
     public DadosDetalhamentoMedico cadastrar(DadosCadastroMedico dados) {
         Medico medico = medicoMapper.toEntity(dados);
+        medico.ativar();
         medicoRepository.save(medico);
 
         return medicoMapper.toDetalhamentoDto(medico);
@@ -34,7 +35,7 @@ public class MedicoService {
 
     public List<DadosListagemMedico> listar() {
         return medicoRepository.findAllByAtivoTrue().stream().map(
-                medico -> medicoMapper.toListagemDto(medico)).toList();
+                medicoMapper::toListagemDto).toList();
     }
 
 

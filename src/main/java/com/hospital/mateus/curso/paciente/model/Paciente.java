@@ -5,13 +5,13 @@ import com.hospital.mateus.curso.paciente.dto.DadosAtualizarPaciente;
 import com.hospital.mateus.curso.medico.model.Medico;
 import com.hospital.mateus.curso.remedio.model.Remedio;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -33,8 +33,8 @@ public class Paciente extends Pessoa {
     @JoinColumn(name = "medico_id")
     private Medico medico;
 
-    public void atualizarInformacoes(@Valid DadosAtualizarPaciente dados) {
-        if (dados.nome() != null) {
+    public void atualizarInformacoes(DadosAtualizarPaciente dados) {
+        if (dados.nome() != null && !Objects.equals(this.nome, dados.nome())) {
             this.nome = dados.nome();
         }
     }

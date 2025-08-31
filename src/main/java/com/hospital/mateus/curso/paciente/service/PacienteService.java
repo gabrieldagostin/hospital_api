@@ -32,6 +32,7 @@ public class PacienteService {
     @Transactional
     public DadosDetalhamentoPaciente cadastrar(DadosCadastroPaciente dados) {
         Paciente paciente = pacienteMapper.toEntity(dados);
+        paciente.ativar();
         pacienteRepository.save(paciente);
 
         return pacienteMapper.toDetalhamentoDto(paciente);
@@ -40,7 +41,7 @@ public class PacienteService {
 
     public List<DadosListagemPaciente> listar() {
         return pacienteRepository.findAllByAtivoTrue().stream().map(
-                paciente -> pacienteMapper.toListagemDto(paciente)).toList();
+                pacienteMapper::toListagemDto).toList();
     }
 
 

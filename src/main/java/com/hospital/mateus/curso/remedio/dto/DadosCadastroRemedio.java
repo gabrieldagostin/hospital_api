@@ -7,6 +7,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 
 import java.time.LocalDate;
 
@@ -22,6 +23,7 @@ public record DadosCadastroRemedio(
         String lote,
 
         @NotNull
+        @PositiveOrZero
         int quantidade,
 
         @Future

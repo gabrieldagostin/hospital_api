@@ -5,13 +5,12 @@ import com.hospital.mateus.curso.paciente.model.Paciente;
 import com.hospital.mateus.curso.core.enums.Laboratorio;
 import com.hospital.mateus.curso.core.enums.Via;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Future;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Table(name = "remedios")
 @Entity(name = "remedio")
@@ -31,7 +30,6 @@ public class Remedio {
     private Via via;
     private String lote;
     private int quantidade;
-    @Future
     private LocalDate validade;
 
     @Enumerated(EnumType.STRING)
@@ -40,17 +38,17 @@ public class Remedio {
     private List<Paciente> pacientes = new ArrayList<>();
     private boolean ativo;
 
-    public void atualizarInformacoes(@Valid DadosAtualizarRemedio dados) {
-        if (dados.nome() != null) {
+    public void atualizarInformacoes(DadosAtualizarRemedio dados) {
+        if (dados.nome() != null && !Objects.equals(this.nome, dados.nome())) {
             this.nome = dados.nome();
         }
-        if (dados.via() != null) {
+        if (dados.via() != null && !Objects.equals(this.via, dados.via())) {
             this.via = dados.via();
         }
-        if (dados.quantidade() > -1) {
+        if (!Objects.equals(this.quantidade, dados.quantidade())) {
             this.quantidade = dados.quantidade();
         }
-        if (dados.laboratorio() != null) {
+        if (dados.laboratorio() != null && !Objects.equals(this.laboratorio, dados.laboratorio())) {
             this.laboratorio = dados.laboratorio();
         }
     }
