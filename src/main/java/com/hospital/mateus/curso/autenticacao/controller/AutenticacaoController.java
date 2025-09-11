@@ -33,10 +33,9 @@ public class AutenticacaoController {
 
     private final TokenService tokenService;
 
-    @PostMapping
     @Operation(
             summary = "Efetua o Login",
-            description = "Método para logar o usuário na aplicação")
+            description = "Método para logar o usuário na aplicação, requisitando seu login e senha")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Usuário logado com sucesso",
                     content = @Content(mediaType = "application/json",
@@ -45,6 +44,7 @@ public class AutenticacaoController {
             @ApiResponse(responseCode = "401", description = "Credenciais inválidas"),
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
+    @PostMapping
     public ResponseEntity<DadosTokenJWT> efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
         var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
         var autenticacao = authenticationManager.authenticate(token);
