@@ -33,6 +33,7 @@ public class PacienteService {
     public DadosDetalhamentoPaciente cadastrar(DadosCadastroPaciente dados) {
         Paciente paciente = pacienteMapper.toEntity(dados);
         paciente.ativar();
+        paciente.setNome(paciente.getNome().trim());
         pacienteRepository.save(paciente);
 
         return pacienteMapper.toDetalhamentoDto(paciente);
