@@ -27,6 +27,8 @@ public class MedicoService {
     public DadosDetalhamentoMedico cadastrar(DadosCadastroMedico dados) {
         Medico medico = medicoMapper.toEntity(dados);
         medico.ativar();
+        medico.setNome(medico.getNome().trim());
+        medico.setCrm(medico.getCrm().trim());
         medicoRepository.save(medico);
 
         return medicoMapper.toDetalhamentoDto(medico);

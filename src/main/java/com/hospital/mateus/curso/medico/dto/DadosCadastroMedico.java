@@ -28,7 +28,7 @@ public record DadosCadastroMedico(
 
         @NotNull
         @Positive
-        double salario,
+        Double salario,
 
         @NotBlank
         String crm,

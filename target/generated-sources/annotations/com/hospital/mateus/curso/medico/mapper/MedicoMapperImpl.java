@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-23T16:01:27-0300",
+    date = "2025-09-23T16:47:47-0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 25 (Oracle Corporation)"
 )
 @Component
@@ -30,7 +30,9 @@ public class MedicoMapperImpl implements MedicoMapper {
         medico.setSexo( dto.sexo() );
         medico.setDataNasc( dto.dataNasc() );
         medico.setCpf( dto.cpf() );
-        medico.setSalario( dto.salario() );
+        if ( dto.salario() != null ) {
+            medico.setSalario( dto.salario() );
+        }
         medico.setCrm( dto.crm() );
         medico.setEspecialidade( dto.especialidade() );
 
