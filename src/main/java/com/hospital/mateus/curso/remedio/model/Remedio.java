@@ -39,13 +39,13 @@ public class Remedio {
     private boolean ativo;
 
     public void atualizarInformacoes(DadosAtualizarRemedio dados) {
-        if (dados.nome() != null && !Objects.equals(this.nome, dados.nome())) {
+        if (dados.nome() != null && !dados.nome().isBlank() && !Objects.equals(this.nome, dados.nome())) {
             this.nome = dados.nome();
         }
         if (dados.via() != null && !Objects.equals(this.via, dados.via())) {
             this.via = dados.via();
         }
-        if (!Objects.equals(this.quantidade, dados.quantidade())) {
+        if (dados.quantidade() != null && !Objects.equals(this.quantidade, dados.quantidade())) {
             this.quantidade = dados.quantidade();
         }
         if (dados.laboratorio() != null && !Objects.equals(this.laboratorio, dados.laboratorio())) {

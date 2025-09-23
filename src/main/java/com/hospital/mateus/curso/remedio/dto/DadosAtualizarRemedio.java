@@ -13,7 +13,7 @@ public record DadosAtualizarRemedio(
         String nome,
 
         @PositiveOrZero
-        int quantidade,
+        Integer quantidade,
 
         Via via,
 
