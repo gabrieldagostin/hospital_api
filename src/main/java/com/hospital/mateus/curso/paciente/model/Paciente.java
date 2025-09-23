@@ -34,7 +34,7 @@ public class Paciente extends Pessoa {
     private Medico medico;
 
     public void atualizarInformacoes(DadosAtualizarPaciente dados) {
-        if (dados.nome() != null && !Objects.equals(this.nome, dados.nome())) {
+        if (dados.nome() != null && !dados.nome().isBlank() && !Objects.equals(this.nome, dados.nome())) {
             this.nome = dados.nome();
         }
     }
