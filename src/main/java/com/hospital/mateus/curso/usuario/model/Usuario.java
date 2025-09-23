@@ -62,10 +62,10 @@ public class Usuario implements UserDetails {
     }
 
     public void atualizarInformacoes(DadosAtualizarUsuario dados) {
-        if (dados.login() != null && !Objects.equals(this.login, dados.login())) {
+        if (dados.login() != null && !dados.login().isBlank() && !Objects.equals(this.login, dados.login())) {
             this.login = dados.login();
         }
-        if (dados.senha() != null && !Objects.equals(this.senha, dados.senha())) {
+        if (dados.senha() != null && !dados.senha().isBlank() && !Objects.equals(this.senha, dados.senha())) {
             this.senha = dados.senha();
         }
     }
