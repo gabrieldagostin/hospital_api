@@ -5,6 +5,7 @@ import com.hospital.mateus.curso.core.enums.Especialidade;
 import com.hospital.mateus.curso.core.enums.Sexo;
 import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public record DadosListagemMedico(
@@ -20,7 +21,7 @@ public record DadosListagemMedico(
 
         String cpf,
 
-        double salario,
+        BigDecimal salario,
 
         String crm,
 

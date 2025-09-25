@@ -6,13 +6,14 @@ import com.hospital.mateus.curso.medico.dto.DadosCadastroMedico;
 import com.hospital.mateus.curso.medico.dto.DadosDetalhamentoMedico;
 import com.hospital.mateus.curso.medico.dto.DadosListagemMedico;
 import com.hospital.mateus.curso.medico.model.Medico;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-23T16:47:47-0300",
+    date = "2025-09-25T08:32:28-0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 25 (Oracle Corporation)"
 )
 @Component
@@ -30,9 +31,7 @@ public class MedicoMapperImpl implements MedicoMapper {
         medico.setSexo( dto.sexo() );
         medico.setDataNasc( dto.dataNasc() );
         medico.setCpf( dto.cpf() );
-        if ( dto.salario() != null ) {
-            medico.setSalario( dto.salario() );
-        }
+        medico.setSalario( dto.salario() );
         medico.setCrm( dto.crm() );
         medico.setEspecialidade( dto.especialidade() );
 
@@ -50,7 +49,7 @@ public class MedicoMapperImpl implements MedicoMapper {
         Sexo sexo = null;
         Date dataNasc = null;
         String cpf = null;
-        double salario = 0.0d;
+        BigDecimal salario = null;
         String crm = null;
         Especialidade especialidade = null;
         boolean ativo = false;
@@ -81,7 +80,7 @@ public class MedicoMapperImpl implements MedicoMapper {
         Sexo sexo = null;
         Date dataNasc = null;
         String cpf = null;
-        double salario = 0.0d;
+        BigDecimal salario = null;
         String crm = null;
         Especialidade especialidade = null;
         boolean ativo = false;

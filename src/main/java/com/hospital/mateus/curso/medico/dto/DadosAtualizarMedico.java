@@ -2,6 +2,8 @@ package com.hospital.mateus.curso.medico.dto;
 
 import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
+
 public record DadosAtualizarMedico(
 
         @NotNull
@@ -9,6 +11,6 @@ public record DadosAtualizarMedico(
 
         String nome,
 
-        Double salario
+        BigDecimal salario
 ) {
 }
