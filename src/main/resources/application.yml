@@ -9,6 +9,14 @@ spring:
     application:
         name: CursoSpringBoot - teste
     datasource:
-        password: ''
-        url: jdbc:mysql://localhost/hospital_api
-        username: root
+        url: jdbc:postgresql://localhost:5432/hospital_api
+        username: postgres
+        password: '12345'
+        driver-class-name: org.postgresql.Driver
+
+    jpa:
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+      hibernate:
+        ddl-auto: update
+
+

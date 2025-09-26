@@ -1,7 +1,5 @@
-CREATE TABLE usuarios(
-id bigint not null auto_increment,
-login varchar(100) not null,
-senha varchar(100) not null,
-
-primary key(id)
+CREATE TABLE usuarios (
+    id BIGSERIAL PRIMARY KEY,
+    login VARCHAR(100) NOT NULL UNIQUE,
+    senha VARCHAR(100) NOT NULL
 );

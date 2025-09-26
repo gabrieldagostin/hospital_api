@@ -1,8 +1,8 @@
-CREATE table medicos(
-id bigint primary key not null auto_increment,
-nome varchar(100) not null,
-idade int not null,
-cpf varchar(100) not null,
-salario decimal (7,2) not null,
-ativo tinyint not null
+CREATE TABLE medicos (
+    id BIGSERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    idade INT NOT NULL,
+    cpf VARCHAR(100) NOT NULL,
+    salario NUMERIC(7,2) NOT NULL,
+    ativo BOOLEAN NOT NULL
 );
