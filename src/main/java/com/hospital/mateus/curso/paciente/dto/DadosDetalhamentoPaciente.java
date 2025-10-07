@@ -35,5 +35,4 @@ public record DadosDetalhamentoPaciente(
                 paciente.getMedico(),
                 paciente.isAtivo());
     }
-
 }

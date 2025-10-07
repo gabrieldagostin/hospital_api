@@ -7,5 +7,4 @@ public record DadosRemoverMedicoPaciente(
         @NotNull
         Long pacienteId
 
-) {
-}
+) {}

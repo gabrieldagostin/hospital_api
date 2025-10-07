@@ -36,5 +36,4 @@ public record DadosCadastroMedico(
 
         @Enumerated(EnumType.STRING)
         Especialidade especialidade
-) {
-}
+) {}

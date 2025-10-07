@@ -8,6 +8,4 @@ public record DadosAtualizarPaciente(
         Long id,
 
         String nome
-) {
-
-}
+) {}

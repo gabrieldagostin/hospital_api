@@ -18,6 +18,4 @@ public record DadosAtualizarRemedio(
         Via via,
 
         Laboratorio laboratorio
-) {
-
-}
+) {}

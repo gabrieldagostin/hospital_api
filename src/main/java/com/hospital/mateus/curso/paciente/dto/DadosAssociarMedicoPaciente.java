@@ -9,6 +9,4 @@ public record DadosAssociarMedicoPaciente(
 
         @NotNull
         Long medico_id
-) {
-
-}
+) {}

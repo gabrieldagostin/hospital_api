@@ -5,6 +5,7 @@ api:
 server:
     error:
         include-stacktrace: NEVER
+    address: 0.0.0.0
 spring:
     application:
         name: CursoSpringBoot - teste

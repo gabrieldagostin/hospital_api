@@ -31,6 +31,4 @@ public record DadosCadastroRemedio(
 
         @Enumerated(EnumType.STRING)
         Laboratorio laboratorio
-) {
-
-}
+) {}

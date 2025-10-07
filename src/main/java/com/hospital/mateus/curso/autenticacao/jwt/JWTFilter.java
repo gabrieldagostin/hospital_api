@@ -24,6 +24,8 @@ public class JWTFilter extends OncePerRequestFilter {
     @Override
         protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
+        System.out.println("JWT Filter path: " + request.getRequestURI());
+
             var tokenJWT = recuperarToken(request);
 
             if (tokenJWT != null) {
@@ -38,10 +40,21 @@ public class JWTFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
     }
 
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        System.out.println("shouldNotFilter -> path: " + request.getRequestURI());
+        String path = request.getRequestURI();
+        return path.startsWith("/swagger-ui")
+                || path.startsWith("/v3/api-docs")
+                || path.startsWith("/swagger-resources")
+                || path.startsWith("/webjars")
+                || path.startsWith("/login");
+    }
+
     private String recuperarToken(HttpServletRequest request) {
         var authorizationHeader = request.getHeader("Authorization");
 
-        if (authorizationHeader != null) {
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             return authorizationHeader.replace("Bearer ", "");
         }
 

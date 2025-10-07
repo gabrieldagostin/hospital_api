@@ -12,5 +12,4 @@ public record DadosAtualizarMedico(
         String nome,
 
         BigDecimal salario
-) {
-}
+) {}

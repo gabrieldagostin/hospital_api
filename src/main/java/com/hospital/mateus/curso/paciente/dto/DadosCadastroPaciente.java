@@ -24,5 +24,4 @@ public record DadosCadastroPaciente(
         @NotBlank
         @CPF
         String cpf
-) {
-}
+) {}

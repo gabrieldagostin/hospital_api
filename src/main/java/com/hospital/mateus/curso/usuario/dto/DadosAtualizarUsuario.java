@@ -10,5 +10,4 @@ public record DadosAtualizarUsuario(
         String login,
 
         String senha
-) {
-}
+) {}

@@ -8,5 +8,4 @@ public record DadosRemedio(
         Long id,
 
         String nome
-) {
-}
+) {}

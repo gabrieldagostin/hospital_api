@@ -9,5 +9,4 @@ public record DadosAssociarRemedioPaciente(
 
         @NotNull
         Long remedio_id
-) {
-}
+) {}
