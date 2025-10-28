@@ -27,7 +27,6 @@ public class UsuarioService {
     public DadosDetalhamentoUsuario cadastrar(DadosCadastroUsuario dados) {
         Usuario usuario = usuarioMapper.toEntity(dados);
         usuario.setLogin(usuario.getLogin().trim());
-        usuario.setSenha(usuario.getSenha().trim());
         usuarioRepository.save(usuario);
 
         return usuarioMapper.toDetalhamentoDto(usuario);

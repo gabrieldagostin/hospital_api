@@ -1,2 +1,0 @@
-ALTER TABLE pacientes
-ADD COLUMN sexo VARCHAR(100);

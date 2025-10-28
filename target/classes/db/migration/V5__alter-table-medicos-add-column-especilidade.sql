@@ -1,1 +1,0 @@
-ALTER TABLE medicos ADD COLUMN especialidade VARCHAR(100) NOT NULL;

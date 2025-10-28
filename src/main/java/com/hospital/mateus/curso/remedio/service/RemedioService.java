@@ -28,6 +28,7 @@ public class RemedioService {
         Remedio remedio = remedioMapper.toEntity(dados);
         remedio.ativar();
         remedio.setNome(remedio.getNome().trim());
+        remedio.setLote(remedio.getLote().trim());
         remedioRepository.save(remedio);
 
         return remedioMapper.toDetalhamentoDto(remedio);

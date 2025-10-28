@@ -1,7 +1,0 @@
-CREATE TABLE pacientes (
-    id BIGSERIAL PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    idade INT NOT NULL,
-    cpf VARCHAR(100) NOT NULL UNIQUE,
-    ativo BOOLEAN NOT NULL
-);

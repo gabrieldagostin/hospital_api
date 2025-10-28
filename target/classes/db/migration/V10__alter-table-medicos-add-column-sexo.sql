@@ -1,2 +1,0 @@
-ALTER TABLE medicos
-ADD COLUMN sexo VARCHAR(100);
