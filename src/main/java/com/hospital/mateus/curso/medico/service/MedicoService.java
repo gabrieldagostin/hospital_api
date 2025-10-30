@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -41,7 +42,7 @@ public class MedicoService {
     }
 
 
-    public DadosDetalhamentoMedico detalhar(Long id) {
+    public DadosDetalhamentoMedico detalhar(UUID id) {
         Medico medico = medicoRepository.getReferenceById(id);
 
         return medicoMapper.toDetalhamentoDto(medico);
@@ -58,20 +59,20 @@ public class MedicoService {
 
 
     @Transactional
-    public void ativar(Long id) {
+    public void ativar(UUID id) {
         Medico medico = medicoRepository.getReferenceById(id);
         medico.ativar();
     }
 
 
     @Transactional
-    public void deletar(Long id) {
+    public void deletar(UUID id) {
         medicoRepository.deleteById(id);
     }
 
 
     @Transactional
-    public void desativar(Long id) {
+    public void desativar(UUID id) {
         Medico medico = medicoRepository.getReferenceById(id);
         medico.desativar();
     }

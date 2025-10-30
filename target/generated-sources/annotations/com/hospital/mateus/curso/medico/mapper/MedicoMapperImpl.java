@@ -8,12 +8,13 @@ import com.hospital.mateus.curso.medico.dto.DadosListagemMedico;
 import com.hospital.mateus.curso.medico.model.Medico;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.UUID;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-10-26T20:59:43-0300",
+    date = "2025-10-30T08:58:50-0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.16 (Microsoft)"
 )
 @Component
@@ -44,7 +45,7 @@ public class MedicoMapperImpl implements MedicoMapper {
             return null;
         }
 
-        Long id = null;
+        UUID id = null;
         String nome = null;
         Sexo sexo = null;
         Date dataNasc = null;
@@ -75,7 +76,7 @@ public class MedicoMapperImpl implements MedicoMapper {
             return null;
         }
 
-        Long id = null;
+        UUID id = null;
         String nome = null;
         Sexo sexo = null;
         Date dataNasc = null;

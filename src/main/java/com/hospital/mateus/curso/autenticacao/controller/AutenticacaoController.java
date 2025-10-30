@@ -3,7 +3,7 @@ package com.hospital.mateus.curso.autenticacao.controller;
 import com.hospital.mateus.curso.autenticacao.dto.DadosAutenticacao;
 import com.hospital.mateus.curso.autenticacao.dto.DadosTokenJWT;
 import com.hospital.mateus.curso.autenticacao.jwt.TokenService;
-import com.hospital.mateus.curso.config.SecurityConfigurations;
+import com.hospital.mateus.curso.core.config.SecurityConfigurations;
 import com.hospital.mateus.curso.usuario.model.Usuario;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

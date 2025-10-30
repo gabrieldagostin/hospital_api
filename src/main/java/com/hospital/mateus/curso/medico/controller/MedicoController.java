@@ -1,8 +1,9 @@
 package com.hospital.mateus.curso.medico.controller;
 
 import java.util.List;
+import java.util.UUID;
 
-import com.hospital.mateus.curso.config.SecurityConfigurations;
+import com.hospital.mateus.curso.core.config.SecurityConfigurations;
 import com.hospital.mateus.curso.medico.service.MedicoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -101,7 +102,7 @@ public class MedicoController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
     @GetMapping("/{id}")
-    public ResponseEntity<DadosDetalhamentoMedico> detalhar(@PathVariable("id") long id) {
+    public ResponseEntity<DadosDetalhamentoMedico> detalhar(@PathVariable("id") UUID id) {
         DadosDetalhamentoMedico medico = medicoService.detalhar(id);
 
         return ResponseEntity.ok(medico);
@@ -146,7 +147,7 @@ public class MedicoController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
     @PutMapping("/ativar/{id}")
-    public ResponseEntity<Void> ativar(@PathVariable("id") long id) {
+    public ResponseEntity<Void> ativar(@PathVariable("id") UUID id) {
         medicoService.ativar(id);
 
         return ResponseEntity.noContent().build();
@@ -166,7 +167,7 @@ public class MedicoController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable("id") long id) {
+    public ResponseEntity<Void> deletar(@PathVariable("id") UUID id) {
         medicoService.deletar(id);
 
         return ResponseEntity.noContent().build();
@@ -186,7 +187,7 @@ public class MedicoController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
     @DeleteMapping("/desativar/{id}")
-    public ResponseEntity<Void> desativar(@PathVariable("id") long id) {
+    public ResponseEntity<Void> desativar(@PathVariable("id") UUID id) {
         medicoService.desativar(id);
 
         return ResponseEntity.noContent().build();

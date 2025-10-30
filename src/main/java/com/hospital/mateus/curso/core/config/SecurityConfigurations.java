@@ -1,4 +1,4 @@
-package com.hospital.mateus.curso.config;
+package com.hospital.mateus.curso.core.config;
 
 import com.hospital.mateus.curso.autenticacao.jwt.JWTFilter;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;

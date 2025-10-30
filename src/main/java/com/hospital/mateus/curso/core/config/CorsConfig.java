@@ -1,4 +1,4 @@
-package com.hospital.mateus.curso.config;
+package com.hospital.mateus.curso.core.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
