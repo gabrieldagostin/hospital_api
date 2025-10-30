@@ -1,6 +1,6 @@
 package com.hospital.mateus.curso.usuario.controller;
 
-import com.hospital.mateus.curso.config.SecurityConfigurations;
+import com.hospital.mateus.curso.core.config.SecurityConfigurations;
 import com.hospital.mateus.curso.usuario.dto.DadosAtualizarUsuario;
 import com.hospital.mateus.curso.usuario.dto.DadosCadastroUsuario;
 import com.hospital.mateus.curso.usuario.dto.DadosDetalhamentoUsuario;
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import java.util.UUID;
 
 @SecurityRequirement(name = SecurityConfigurations.SECURITY)
 @RequiredArgsConstructor
@@ -72,7 +73,7 @@ public class UsuarioController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
     @GetMapping("/{id}")
-    public ResponseEntity<DadosDetalhamentoUsuario> detalhar(@PathVariable("id") long id) {
+    public ResponseEntity<DadosDetalhamentoUsuario> detalhar(@PathVariable("id") UUID id) {
         DadosDetalhamentoUsuario usuario = usuarioService.detalhar(id);
 
         return ResponseEntity.ok(usuario);
@@ -137,7 +138,7 @@ public class UsuarioController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable("id") long id) {
+    public ResponseEntity<Void> deletar(@PathVariable("id") UUID id) {
         usuarioService.deletar(id);
 
         return ResponseEntity.noContent().build();

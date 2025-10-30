@@ -2,10 +2,12 @@ package com.hospital.mateus.curso.usuario.dto;
 
 import jakarta.validation.constraints.NotNull;
 
+import java.util.UUID;
+
 public record DadosAtualizarUsuario(
 
         @NotNull
-        Long id,
+        UUID id,
 
         String login,
 
