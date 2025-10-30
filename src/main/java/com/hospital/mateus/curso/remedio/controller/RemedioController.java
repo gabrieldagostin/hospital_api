@@ -1,6 +1,6 @@
 package com.hospital.mateus.curso.remedio.controller;
 
-import com.hospital.mateus.curso.config.SecurityConfigurations;
+import com.hospital.mateus.curso.core.config.SecurityConfigurations;
 import com.hospital.mateus.curso.remedio.dto.DadosAtualizarRemedio;
 import com.hospital.mateus.curso.remedio.dto.DadosCadastroRemedio;
 import com.hospital.mateus.curso.remedio.dto.DadosDetalhamentoRemedio;
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import java.util.UUID;
 
 @SecurityRequirement(name = SecurityConfigurations.SECURITY)
 @RequiredArgsConstructor
@@ -94,7 +95,7 @@ public class RemedioController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
     @GetMapping("/{id}")
-    public ResponseEntity<DadosDetalhamentoRemedio> detalhar(@PathVariable("id") long id) {
+    public ResponseEntity<DadosDetalhamentoRemedio> detalhar(@PathVariable("id") UUID id) {
         DadosDetalhamentoRemedio remedio = remedioService.detalhar(id);
 
         return ResponseEntity.ok(remedio);
@@ -139,7 +140,7 @@ public class RemedioController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
     @PutMapping("/ativar/{id}")
-    public ResponseEntity<Void> ativar(@PathVariable("id") long id) {
+    public ResponseEntity<Void> ativar(@PathVariable("id") UUID id) {
         remedioService.ativar(id);
 
         return ResponseEntity.noContent().build();
@@ -159,7 +160,7 @@ public class RemedioController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable("id") long id) {
+    public ResponseEntity<Void> deletar(@PathVariable("id") UUID id) {
         remedioService.deletar(id);
 
         return ResponseEntity.noContent().build();
@@ -179,7 +180,7 @@ public class RemedioController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
     @DeleteMapping("desativar/{id}")
-    public ResponseEntity<Void> desativar(@PathVariable("id") long id) {
+    public ResponseEntity<Void> desativar(@PathVariable("id") UUID id) {
         remedioService.desativar(id);
 
         return ResponseEntity.noContent().build();

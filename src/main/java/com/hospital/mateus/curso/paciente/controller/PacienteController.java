@@ -1,6 +1,6 @@
 package com.hospital.mateus.curso.paciente.controller;
 
-import com.hospital.mateus.curso.config.SecurityConfigurations;
+import com.hospital.mateus.curso.core.config.SecurityConfigurations;
 import com.hospital.mateus.curso.paciente.dto.*;
 import com.hospital.mateus.curso.paciente.service.PacienteService;
 import com.hospital.mateus.curso.remedio.dto.DadosListagemRemedio;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import java.util.UUID;
 
 @SecurityRequirement(name = SecurityConfigurations.SECURITY)
 @RequiredArgsConstructor
@@ -93,7 +94,7 @@ public class PacienteController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
     @GetMapping("/{id}")
-    public ResponseEntity<DadosDetalhamentoPaciente> detalhar(@PathVariable("id") long id) {
+    public ResponseEntity<DadosDetalhamentoPaciente> detalhar(@PathVariable("id") UUID id) {
         DadosDetalhamentoPaciente paciente = pacienteService.detalhar(id);
 
         return ResponseEntity.ok(paciente);
@@ -138,7 +139,7 @@ public class PacienteController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
     @PutMapping("/ativar/{id}")
-    public ResponseEntity<Void> ativar(@PathVariable("id") long id) {
+    public ResponseEntity<Void> ativar(@PathVariable("id") UUID id) {
         pacienteService.ativar(id);
 
         return ResponseEntity.noContent().build();
@@ -158,7 +159,7 @@ public class PacienteController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
     @DeleteMapping("/desativar/{id}")
-    public ResponseEntity<Void> desativar(@PathVariable("id") long id) {
+    public ResponseEntity<Void> desativar(@PathVariable("id") UUID id) {
         pacienteService.desativar(id);
 
         return ResponseEntity.noContent().build();
@@ -178,7 +179,7 @@ public class PacienteController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable("id") long id) {
+    public ResponseEntity<Void> deletar(@PathVariable("id") UUID id) {
         pacienteService.deletar(id);
 
         return ResponseEntity.noContent().build();
@@ -240,7 +241,7 @@ public class PacienteController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
     @GetMapping("/{id}/remedios")
-    public ResponseEntity<List<DadosRemedio>> listarRemedios(@PathVariable("id") long id) {
+    public ResponseEntity<List<DadosRemedio>> listarRemedios(@PathVariable("id") UUID id) {
         List<DadosRemedio> lista = pacienteService.listarRemedios(id);
 
         return ResponseEntity.ok(lista);
