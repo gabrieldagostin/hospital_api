@@ -5,10 +5,12 @@ import com.hospital.mateus.curso.core.enums.Via;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
+import java.util.UUID;
+
 public record DadosAtualizarRemedio(
 
         @NotNull
-        Long id,
+        UUID id,
 
         String nome,
 

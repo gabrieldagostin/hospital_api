@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Table(name = "remedios")
 @Entity(name = "remedio")
@@ -22,8 +23,8 @@ import java.util.Objects;
 public class Remedio {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     private String nome;
 
     @Enumerated(EnumType.STRING)
