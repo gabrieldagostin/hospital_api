@@ -1,5 +1,0 @@
--- feat(front) Adding front-end to application for best api consume
--- fix(Usuario) create new user dont give JWTtoken
--- refactor(Usuario) change id for UUID
--- refactor(Remedio) change id for UUID
--- refactor(Paciente) change id for UUID
