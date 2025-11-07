@@ -115,10 +115,9 @@ public class PacienteService {
         Paciente paciente = pacienteRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
 
-        List<DadosRemedio> lista = paciente.getRemedios().stream()
-                .map(remedio -> pacienteMapper.toDadosRemedioDto(remedio)).toList();
-
-        return lista;
+        return paciente.getRemedios()
+                .stream()
+                .map(pacienteMapper::toDadosRemedioDto).toList();
     }
 
 

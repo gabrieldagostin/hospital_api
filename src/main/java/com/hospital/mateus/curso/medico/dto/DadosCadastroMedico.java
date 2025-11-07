@@ -6,6 +6,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Positive;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -21,6 +22,7 @@ public record DadosCadastroMedico(
         Sexo sexo,
 
         @NotNull
+        @Past
         Date dataNasc,
 
         @NotBlank
