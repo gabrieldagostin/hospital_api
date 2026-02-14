@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -26,6 +27,7 @@ public class UsuarioService {
     @Transactional
     public DadosDetalhamentoUsuario cadastrar(DadosCadastroUsuario dados) {
         Usuario usuario = usuarioMapper.toEntity(dados);
+        usuario.setLogin(usuario.getLogin().trim());
         usuarioRepository.save(usuario);
 
         return usuarioMapper.toDetalhamentoDto(usuario);
@@ -33,7 +35,7 @@ public class UsuarioService {
 
 
 
-    public DadosDetalhamentoUsuario detalhar(Long id) {
+    public DadosDetalhamentoUsuario detalhar(UUID id) {
             Usuario usuario = usuarioRepository.getReferenceById(id);
 
             return usuarioMapper.toDetalhamentoDto(usuario);
@@ -56,7 +58,7 @@ public class UsuarioService {
 
 
     @Transactional
-    public void deletar(Long id) {
+    public void deletar(UUID id) {
         usuarioRepository.deleteById(id);
     }
 }

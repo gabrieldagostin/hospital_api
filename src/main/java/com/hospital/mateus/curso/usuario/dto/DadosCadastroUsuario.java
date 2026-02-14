@@ -10,5 +10,4 @@ public record DadosCadastroUsuario(
         @NotBlank
         String senha
 
-) {
-}
+) {}

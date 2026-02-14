@@ -5,10 +5,7 @@ import com.hospital.mateus.curso.paciente.dto.DadosAtualizarPaciente;
 import com.hospital.mateus.curso.medico.model.Medico;
 import com.hospital.mateus.curso.remedio.model.Remedio;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -34,7 +31,7 @@ public class Paciente extends Pessoa {
     private Medico medico;
 
     public void atualizarInformacoes(DadosAtualizarPaciente dados) {
-        if (dados.nome() != null && !Objects.equals(this.nome, dados.nome())) {
+        if (dados.nome() != null && !dados.nome().isBlank() && !Objects.equals(this.nome, dados.nome())) {
             this.nome = dados.nome();
         }
     }

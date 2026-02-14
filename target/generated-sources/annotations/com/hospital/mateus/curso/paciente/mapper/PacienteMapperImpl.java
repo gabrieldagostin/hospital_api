@@ -9,13 +9,14 @@ import com.hospital.mateus.curso.paciente.model.Paciente;
 import com.hospital.mateus.curso.remedio.dto.DadosRemedio;
 import com.hospital.mateus.curso.remedio.model.Remedio;
 import java.util.Date;
+import java.util.UUID;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-08-30T18:07:57-0300",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 24.0.2 (Oracle Corporation)"
+    date = "2025-11-07T12:59:07-0300",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
 public class PacienteMapperImpl implements PacienteMapper {
@@ -42,7 +43,7 @@ public class PacienteMapperImpl implements PacienteMapper {
             return null;
         }
 
-        Long id = null;
+        UUID id = null;
         String nome = null;
         Sexo sexo = null;
         Date dataNasc = null;
@@ -69,7 +70,7 @@ public class PacienteMapperImpl implements PacienteMapper {
             return null;
         }
 
-        Long id = null;
+        UUID id = null;
         String nome = null;
         Sexo sexo = null;
         Date dataNasc = null;
@@ -94,7 +95,7 @@ public class PacienteMapperImpl implements PacienteMapper {
             return null;
         }
 
-        Long id = null;
+        UUID id = null;
         String nome = null;
 
         id = remedio.getId();

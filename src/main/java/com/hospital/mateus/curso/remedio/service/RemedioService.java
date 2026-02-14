@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +28,8 @@ public class RemedioService {
     public DadosDetalhamentoRemedio cadastrar(DadosCadastroRemedio dados) {
         Remedio remedio = remedioMapper.toEntity(dados);
         remedio.ativar();
+        remedio.setNome(remedio.getNome().trim());
+        remedio.setLote(remedio.getLote().trim());
         remedioRepository.save(remedio);
 
         return remedioMapper.toDetalhamentoDto(remedio);
@@ -39,7 +42,7 @@ public class RemedioService {
     }
 
 
-    public DadosDetalhamentoRemedio detalhar(Long id) {
+    public DadosDetalhamentoRemedio detalhar(UUID id) {
         Remedio remedio = remedioRepository.getReferenceById(id);
 
         return remedioMapper.toDetalhamentoDto(remedio);
@@ -56,20 +59,20 @@ public class RemedioService {
 
 
     @Transactional
-    public void ativar(Long id) {
+    public void ativar(UUID id) {
         Remedio remedio = remedioRepository.getReferenceById(id);
         remedio.ativar();
     }
 
 
     @Transactional
-    public void deletar(Long id) {
+    public void deletar(UUID id) {
         remedioRepository.deleteById(id);
     }
 
 
     @Transactional
-    public void desativar(Long id) {
+    public void desativar(UUID id) {
         Remedio remedio = remedioRepository.getReferenceById(id);
         remedio.desativar();
     }

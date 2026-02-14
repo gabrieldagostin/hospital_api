@@ -1,9 +1,11 @@
-CREATE TABLE remedios(
-id bigint primary key not null auto_increment,
-nome varchar(100) not null,
-via varchar(100) not null,
-lote varchar(100) not null,
-quantidade int(20) not null,
-validade varchar(100) not null,
-laboratorio varchar(100) not null
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
+CREATE TABLE remedios (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    via VARCHAR(100) NOT NULL,
+    lote VARCHAR(100) NOT NULL,
+    quantidade INT NOT NULL,
+    validade DATE NOT NULL,
+    laboratorio VARCHAR(100) NOT NULL
 );

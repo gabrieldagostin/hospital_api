@@ -2,12 +2,13 @@ package com.hospital.mateus.curso.paciente.dto;
 
 import jakarta.validation.constraints.NotNull;
 
+import java.util.UUID;
+
 public record DadosAssociarRemedioPaciente(
 
         @NotNull
-        Long paciente_id,
+        UUID paciente_id,
 
         @NotNull
-        Long remedio_id
-) {
-}
+        UUID remedio_id
+) {}

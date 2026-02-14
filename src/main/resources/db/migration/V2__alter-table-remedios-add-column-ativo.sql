@@ -1,2 +1,1 @@
-alter table remedios add ativo tinyint;
-update remedios set ativo = 1;
+ALTER TABLE remedios ADD COLUMN ativo BOOLEAN;

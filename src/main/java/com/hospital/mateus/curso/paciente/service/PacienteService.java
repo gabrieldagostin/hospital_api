@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -33,6 +34,7 @@ public class PacienteService {
     public DadosDetalhamentoPaciente cadastrar(DadosCadastroPaciente dados) {
         Paciente paciente = pacienteMapper.toEntity(dados);
         paciente.ativar();
+        paciente.setNome(paciente.getNome().trim());
         pacienteRepository.save(paciente);
 
         return pacienteMapper.toDetalhamentoDto(paciente);
@@ -45,7 +47,7 @@ public class PacienteService {
     }
 
 
-    public DadosDetalhamentoPaciente detalhar(Long id) {
+    public DadosDetalhamentoPaciente detalhar(UUID id) {
         Paciente paciente = pacienteRepository.getReferenceById(id);
 
         return pacienteMapper.toDetalhamentoDto(paciente);
@@ -62,21 +64,21 @@ public class PacienteService {
 
 
     @Transactional
-    public void ativar(Long id) {
+    public void ativar(UUID id) {
         Paciente paciente = pacienteRepository.getReferenceById(id);
         paciente.ativar();
     }
 
 
     @Transactional
-    public void desativar(Long id) {
+    public void desativar(UUID id) {
         Paciente paciente = pacienteRepository.getReferenceById(id);
         paciente.desativar();
     }
 
 
     @Transactional
-    public void deletar(Long id) {
+    public void deletar(UUID id) {
         pacienteRepository.deleteById(id);
     }
 
@@ -109,14 +111,13 @@ public class PacienteService {
     }
 
 
-    public List<DadosRemedio> listarRemedios(Long id) {
+    public List<DadosRemedio> listarRemedios(UUID id) {
         Paciente paciente = pacienteRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
 
-        List<DadosRemedio> lista = paciente.getRemedios().stream()
-                .map(remedio -> pacienteMapper.toDadosRemedioDto(remedio)).toList();
-
-        return lista;
+        return paciente.getRemedios()
+                .stream()
+                .map(pacienteMapper::toDadosRemedioDto).toList();
     }
 
 

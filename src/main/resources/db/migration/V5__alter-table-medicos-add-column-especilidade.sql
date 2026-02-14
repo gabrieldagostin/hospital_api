@@ -1,1 +1,1 @@
-alter table medicos add column especialidade varchar(100) not null;
+ALTER TABLE medicos ADD COLUMN especialidade VARCHAR(100) NOT NULL;

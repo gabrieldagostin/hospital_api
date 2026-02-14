@@ -5,11 +5,12 @@ import com.hospital.mateus.curso.core.enums.Sexo;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
+import java.util.UUID;
 
 public record DadosListagemPaciente(
 
         @NotNull
-        Long id,
+        UUID id,
 
         String nome,
 

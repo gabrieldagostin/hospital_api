@@ -6,9 +6,11 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Positive;
 import org.hibernate.validator.constraints.br.CPF;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public record DadosCadastroMedico(
@@ -20,6 +22,7 @@ public record DadosCadastroMedico(
         Sexo sexo,
 
         @NotNull
+        @Past
         Date dataNasc,
 
         @NotBlank
@@ -28,12 +31,11 @@ public record DadosCadastroMedico(
 
         @NotNull
         @Positive
-        double salario,
+        BigDecimal salario,
 
         @NotBlank
         String crm,
 
         @Enumerated(EnumType.STRING)
         Especialidade especialidade
-) {
-}
+) {}

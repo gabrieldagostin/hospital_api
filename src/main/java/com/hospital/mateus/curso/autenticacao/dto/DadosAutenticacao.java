@@ -8,5 +8,4 @@ public record DadosAutenticacao(
         String login,
         @NotBlank
         String senha
-) {
-}
+) {}

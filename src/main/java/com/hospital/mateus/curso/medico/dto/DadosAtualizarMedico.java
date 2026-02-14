@@ -2,13 +2,15 @@ package com.hospital.mateus.curso.medico.dto;
 
 import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
+import java.util.UUID;
+
 public record DadosAtualizarMedico(
 
         @NotNull
-        Long id,
+        UUID id,
 
         String nome,
 
-        Double salario
-) {
-}
+        BigDecimal salario
+) {}

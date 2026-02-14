@@ -1,2 +1,2 @@
 ALTER TABLE pacientes
-ADD COLUMN sexo varchar(100) AFTER nome;
+ADD COLUMN sexo VARCHAR(100);

@@ -7,13 +7,14 @@ import com.hospital.mateus.curso.remedio.dto.DadosDetalhamentoRemedio;
 import com.hospital.mateus.curso.remedio.dto.DadosListagemRemedio;
 import com.hospital.mateus.curso.remedio.model.Remedio;
 import java.time.LocalDate;
+import java.util.UUID;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-08-30T18:07:57-0300",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 24.0.2 (Oracle Corporation)"
+    date = "2025-11-07T12:59:08-0300",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
 public class RemedioMapperImpl implements RemedioMapper {
@@ -42,7 +43,7 @@ public class RemedioMapperImpl implements RemedioMapper {
             return null;
         }
 
-        Long id = null;
+        UUID id = null;
         String nome = null;
         Via via = null;
         String lote = null;
@@ -71,7 +72,7 @@ public class RemedioMapperImpl implements RemedioMapper {
             return null;
         }
 
-        Long id = null;
+        UUID id = null;
         String nome = null;
         Via via = null;
         String lote = null;

@@ -1,1 +1,1 @@
-alter table medicos add column crm varchar(100) not null;
+ALTER TABLE medicos ADD COLUMN crm VARCHAR(100) NOT NULL;

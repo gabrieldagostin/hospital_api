@@ -4,5 +4,4 @@ public record DadosTokenJWT(
 
         String tokenJWT
 
-) {
-}
+) {}

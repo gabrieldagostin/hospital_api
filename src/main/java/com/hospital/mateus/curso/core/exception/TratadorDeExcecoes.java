@@ -1,4 +1,4 @@
-package com.hospital.mateus.curso.exception;
+package com.hospital.mateus.curso.core.exception;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;

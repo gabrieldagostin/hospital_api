@@ -6,11 +6,12 @@ import com.hospital.mateus.curso.core.enums.Via;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public record DadosListagemRemedio(
 
         @NotNull
-        Long id,
+        UUID id,
 
         String nome,
 

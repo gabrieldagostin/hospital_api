@@ -4,13 +4,14 @@ import com.hospital.mateus.curso.usuario.dto.DadosCadastroUsuario;
 import com.hospital.mateus.curso.usuario.dto.DadosDetalhamentoUsuario;
 import com.hospital.mateus.curso.usuario.dto.DadosListagemUsuario;
 import com.hospital.mateus.curso.usuario.model.Usuario;
+import java.util.UUID;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-08-30T18:07:57-0300",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 24.0.2 (Oracle Corporation)"
+    date = "2025-11-07T12:59:08-0300",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
 public class UsuarioMapperImpl implements UsuarioMapper {
@@ -35,7 +36,7 @@ public class UsuarioMapperImpl implements UsuarioMapper {
             return null;
         }
 
-        Long id = null;
+        UUID id = null;
         String login = null;
         String senha = null;
 
@@ -54,7 +55,7 @@ public class UsuarioMapperImpl implements UsuarioMapper {
             return null;
         }
 
-        Long id = null;
+        UUID id = null;
         String login = null;
         String senha = null;
 

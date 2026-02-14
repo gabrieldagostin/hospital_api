@@ -6,14 +6,16 @@ import com.hospital.mateus.curso.medico.dto.DadosCadastroMedico;
 import com.hospital.mateus.curso.medico.dto.DadosDetalhamentoMedico;
 import com.hospital.mateus.curso.medico.dto.DadosListagemMedico;
 import com.hospital.mateus.curso.medico.model.Medico;
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.UUID;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-08-30T18:07:57-0300",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 24.0.2 (Oracle Corporation)"
+    date = "2025-11-07T12:59:08-0300",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
 public class MedicoMapperImpl implements MedicoMapper {
@@ -43,12 +45,12 @@ public class MedicoMapperImpl implements MedicoMapper {
             return null;
         }
 
-        Long id = null;
+        UUID id = null;
         String nome = null;
         Sexo sexo = null;
         Date dataNasc = null;
         String cpf = null;
-        double salario = 0.0d;
+        BigDecimal salario = null;
         String crm = null;
         Especialidade especialidade = null;
         boolean ativo = false;
@@ -74,12 +76,12 @@ public class MedicoMapperImpl implements MedicoMapper {
             return null;
         }
 
-        Long id = null;
+        UUID id = null;
         String nome = null;
         Sexo sexo = null;
         Date dataNasc = null;
         String cpf = null;
-        double salario = 0.0d;
+        BigDecimal salario = null;
         String crm = null;
         Especialidade especialidade = null;
         boolean ativo = false;

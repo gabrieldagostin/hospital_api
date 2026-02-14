@@ -2,12 +2,12 @@ package com.hospital.mateus.curso.paciente.dto;
 
 import jakarta.validation.constraints.NotNull;
 
+import java.util.UUID;
+
 public record DadosAtualizarPaciente(
 
         @NotNull
-        Long id,
+        UUID id,
 
         String nome
-) {
-
-}
+) {}

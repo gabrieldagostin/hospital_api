@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Getter
@@ -17,9 +18,9 @@ import java.util.Date;
 public abstract class Funcionario extends Pessoa {
 
     @Positive
-    protected double salario;
+    protected BigDecimal salario;
 
-    public Funcionario(@NotBlank String nome, @NotBlank Sexo sexo, @NotNull Date dataNasc, @NotBlank String cpf, @NotNull double salario) {
+    public Funcionario(@NotBlank String nome, @NotBlank Sexo sexo, @NotNull Date dataNasc, @NotBlank String cpf, @NotNull BigDecimal salario) {
         super(nome, sexo, dataNasc, cpf);
         this.salario = salario;
     }
